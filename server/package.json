@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "drizGen": "npx drizzle-kit generate",
+    "drizPush": "npx drizzle-kit push"
   },
   "keywords": [],
   "author": "",

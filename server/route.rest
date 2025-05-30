@@ -1,0 +1,21 @@
+GET http://localhost:3000/usersRouter
+
+###
+
+GET http://localhost:3000/usersRouter/b4037141-dc2a-44f5-9d52-a0ec80d6af09
+
+###
+
+POST http://localhost:3000/usersRouter/Another user
+
+###
+
+DELETE http://localhost:3000/usersRouter/6ed89092-3ce0-40f1-88a1-2915600c630e
+
+###
+PATCH http://localhost:3000/usersRouter/b4037141-dc2a-44f5-9d52-a0ec80d6af09
+Content-Type: application/json
+
+{
+    "name": "get fucked"
+}
