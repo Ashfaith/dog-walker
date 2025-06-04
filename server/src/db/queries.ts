@@ -7,15 +7,15 @@ import "dotenv/config";
 
 export const db = drizzle(pool, { schema });
 
-export async function getAllUsernames() {
+async function getAllUsernames() {
   return await db.select().from(usersTable);
 }
 
-export async function insertUsername(name: string) {
-  return await db.insert(usersTable).values({ name }).returning();
+async function insertUser(name: string, pw: string) {
+  return await db.insert(usersTable).values({ name, pw }).returning();
 }
 
-export async function getUserById(userId: string) {
+async function getUserById(userId: string) {
   return await db
     .select()
     .from(usersTable)
@@ -23,14 +23,22 @@ export async function getUserById(userId: string) {
     .then((res) => res[0]);
 }
 
-export async function deleteUserByName(name: string) {
+async function getUserByName(userName: string) {
+  return await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.name, userName))
+    .then((res) => res[0]);
+}
+
+async function deleteUserByName(name: string) {
   return await db
     .delete(usersTable)
     .where(eq(usersTable.name, name))
     .returning();
 }
 
-export async function updateUser(newName: string, userId: string) {
+async function updateUser(newName: string, userId: string) {
   return await db
     .update(usersTable)
     .set({ name: newName })
@@ -41,7 +49,8 @@ export async function updateUser(newName: string, userId: string) {
 module.exports = {
   deleteUserByName,
   getAllUsernames,
-  insertUsername,
+  getUserByName,
+  insertUser,
   getUserById,
   updateUser,
 };

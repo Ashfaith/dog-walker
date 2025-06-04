@@ -12,10 +12,11 @@ async function listAllUsers(req, res) {
 
 async function createUser(req, res) {
   try {
-    const user = await models.insertUsername(req.params.id);
+    const { name, pw } = req.body;
+    const user = await models.insertUser(name, pw);
     res.json(user);
   } catch (err) {
-    res.status(500).json({ message: "Server error. Unable to create user" });
+    res.status(500).json({ message: err.message });
   }
 }
 

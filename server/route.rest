@@ -7,15 +7,21 @@ GET http://localhost:3000/usersRouter/b4037141-dc2a-44f5-9d52-a0ec80d6af09
 ###
 
 POST http://localhost:3000/usersRouter/Another user
+Content-Type: application/json
+
+{
+    "name": "Alfie",
+    "pw": "freddy331"
+}
 
 ###
 
 DELETE http://localhost:3000/usersRouter/6ed89092-3ce0-40f1-88a1-2915600c630e
 
 ###
-PATCH http://localhost:3000/usersRouter/b4037141-dc2a-44f5-9d52-a0ec80d6af09
+PATCH http://localhost:3000/usersRouter/82048194-e36e-44ac-ad29-6c0b966ed1bb
 Content-Type: application/json
 
 {
-    "name": "get fucked"
+    "pw": "freddy331"
 }
