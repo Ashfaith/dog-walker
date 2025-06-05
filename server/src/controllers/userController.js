@@ -12,8 +12,8 @@ async function listAllUsers(req, res) {
 
 async function createUser(req, res) {
   try {
-    const { name, pw } = req.body;
-    const user = await models.insertUser(name, pw);
+    const { name, email, pw } = req.body;
+    const user = await models.insertUser(name, email, pw);
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });

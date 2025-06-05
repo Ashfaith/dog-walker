@@ -12,22 +12,13 @@ router.get("/:id", getUser, (req, res) => {
 });
 
 //Create user
-router.post("/:id", controller.createUser);
+router.post("/", controller.createUser);
 
 //Update user
 router.patch("/:id", getUser, controller.editUser);
 
 //Delete user
 router.delete("/:id", getUser, controller.deleteUser);
-
-//Auth login
-router.post(
-  "login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/login",
-  })
-);
 
 async function getUser(req, res, next) {
   let user;

@@ -11,8 +11,8 @@ async function getAllUsernames() {
   return await db.select().from(usersTable);
 }
 
-async function insertUser(name: string, pw: string) {
-  return await db.insert(usersTable).values({ name, pw }).returning();
+async function insertUser(name: string, email: string, pw: string) {
+  return await db.insert(usersTable).values({ name, email, pw }).returning();
 }
 
 async function getUserById(userId: string) {
