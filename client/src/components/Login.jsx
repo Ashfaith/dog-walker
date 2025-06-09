@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [form, setForm] = useState(null);
+  const { setAuth } = useContext(AuthContext);
+  const [form, setForm] = useState({ username: "", password: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setForm({ email, password });
     const res = await fetch("http://localhost:3000/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,8 +16,11 @@ function Login() {
       body: JSON.stringify(form),
     });
 
-    if (res.ok) navigate("/dahsboard");
-    else alert("Login failed");
+    if (res.ok) {
+      setAuth(true);
+      console.log("logged in, navigating to dashboard");
+      navigate("/dashboard");
+    } else alert("Login failed");
   };
 
   return (
@@ -30,16 +32,20 @@ function Login() {
           type="email"
           name="email"
           placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.username}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, username: e.target.value }))
+          }
         />
         <label>Password</label>
         <input
           type="password"
           name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, password: e.target.value }))
+          }
         />
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Log In

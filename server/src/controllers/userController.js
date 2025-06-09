@@ -1,4 +1,6 @@
-const models = require("../db/queries");
+const { response } = require("express");
+const models = require("../db/models");
+const bcrypt = require("bcryptjs");
 
 async function listAllUsers(req, res) {
   try {
@@ -48,9 +50,25 @@ async function editUser(req, res) {
   }
 }
 
+async function updatePassword(req, res) {
+  const user = req.user;
+  if (req.body.name !== null) {
+    req.user.name = req.body.name;
+  }
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.pw, 10);
+    const updatedUser = await models.updatePassword(hashedPassword, user.id);
+    res.json(updatedUser);
+    // res.redirect("/");
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
+
 module.exports = {
   listAllUsers,
   deleteUser,
   createUser,
   editUser,
+  updatePassword,
 };

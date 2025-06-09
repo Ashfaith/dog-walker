@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
+import { AuthContext } from "./components/AuthContext";
 
 function App() {
-  const [auth, setAuth] = useState(null);
+  const { auth } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetch("/auth/check", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => setAuth(data.loggedIn))
-      .catch(() => setAuth(false));
-  }, []);
-
+  console.log(auth);
   if (auth === null) return <div>Loading...</div>;
 
   return (
@@ -24,12 +17,16 @@ function App() {
         <Route
           path="/"
           element={
-            auth ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+            auth ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         />
         <Route
           path="/dashboard"
-          element={auth ? <Dashboard /> : <Navigate to="/login" />}
+          element={auth ? <Dashboard /> : <Navigate to="/login" replace />}
         />
         <Route path="/login" element={<Login />} />
       </Routes>

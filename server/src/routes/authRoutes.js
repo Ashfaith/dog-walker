@@ -3,6 +3,10 @@ const router = express.Router();
 require("../config/passport");
 const passport = require("passport");
 
+router.get("/test", (req, res) => {
+  res.send("Auth route works");
+});
+
 router.post("/login", passport.authenticate("local"), (req, res) => {
   res.json({ success: true, user: req.user });
 });

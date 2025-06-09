@@ -1,16 +1,19 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const models = require("../db/queries.ts");
+const models = require("../db/models.ts");
+const bcrypt = require("bcryptjs");
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await models.getUserByName(username);
+      const user = await models.getUserByEmail(username);
 
       if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+        console.log("user not found");
+        return done(null, false, { message: "Incorrect email" });
       }
-      if (user.password !== password) {
+      const match = await bcrypt.compare(password, user.pw);
+      if (!match) {
         return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);

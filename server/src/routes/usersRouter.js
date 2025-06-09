@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/userController");
-const models = require("../db/queries");
+const models = require("../db/models");
 
 router.get("/", controller.listAllUsers);
 
@@ -16,6 +16,8 @@ router.post("/", controller.createUser);
 
 //Update user
 router.patch("/:id", getUser, controller.editUser);
+
+router.patch("/passwordUpdate/:id", getUser, controller.updatePassword);
 
 //Delete user
 router.delete("/:id", getUser, controller.deleteUser);

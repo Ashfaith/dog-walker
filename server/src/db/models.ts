@@ -31,6 +31,14 @@ async function getUserByName(userName: string) {
     .then((res) => res[0]);
 }
 
+async function getUserByEmail(email: string) {
+  return await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.email, email))
+    .then((res) => res[0]);
+}
+
 async function deleteUserByName(name: string) {
   return await db
     .delete(usersTable)
@@ -46,11 +54,21 @@ async function updateUser(newName: string, userId: string) {
     .returning();
 }
 
+async function updatePassword(newPassword: string, userId: string) {
+  return await db
+    .update(usersTable)
+    .set({ pw: newPassword })
+    .where(eq(usersTable.id, userId))
+    .returning();
+}
+
 module.exports = {
   deleteUserByName,
   getAllUsernames,
   getUserByName,
+  getUserByEmail,
   insertUser,
   getUserById,
   updateUser,
+  updatePassword,
 };

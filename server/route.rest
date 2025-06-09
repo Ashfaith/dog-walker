@@ -26,3 +26,25 @@ Content-Type: application/json
 {
     "pw": "freddy331"
 }
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "alf.fred@gmail.com",
+    "password": "freddy331"
+}
+
+###
+
+GET http://localhost:3000/auth/test
+
+###
+
+PATCH http://localhost:3000/users/passwordUpdate/e6a06e2f-2e11-4f50-9db5-f009dfecb732
+Content-Type: application/json
+
+{
+    "pw": "freddy331"
+}
