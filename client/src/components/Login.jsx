@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
@@ -25,7 +26,7 @@ function Login() {
 
   return (
     <>
-      <h2>SIGN IN</h2>
+      <h2>LOGIN</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>Email</label>
         <input
@@ -50,6 +51,10 @@ function Login() {
         <button type="submit" onClick={(e) => handleSubmit(e)}>
           Log In
         </button>
+        <p>
+          No account?
+          <NavLink to="/signup"> Sign up!</NavLink>
+        </p>
       </form>
     </>
   );

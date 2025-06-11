@@ -15,7 +15,8 @@ async function listAllUsers(req, res) {
 async function createUser(req, res) {
   try {
     const { name, email, pw } = req.body;
-    const user = await models.insertUser(name, email, pw);
+    const hashedPassword = await bcrypt.hash(pw, 10);
+    const user = await models.insertUser(name, email, hashedPassword);
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -25,7 +26,7 @@ async function createUser(req, res) {
 async function deleteUser(req, res) {
   const user = req.user;
   try {
-    const deleted = await models.deleteUserByName(user.name);
+    const deleted = await models.deleteUserById(user.id);
     if (deleted.length === 0) {
       return res
         .status(404)

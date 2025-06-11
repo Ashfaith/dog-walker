@@ -39,11 +39,8 @@ async function getUserByEmail(email: string) {
     .then((res) => res[0]);
 }
 
-async function deleteUserByName(name: string) {
-  return await db
-    .delete(usersTable)
-    .where(eq(usersTable.name, name))
-    .returning();
+async function deleteUserById(id: string) {
+  return await db.delete(usersTable).where(eq(usersTable.id, id)).returning();
 }
 
 async function updateUser(newName: string, userId: string) {
@@ -63,7 +60,7 @@ async function updatePassword(newPassword: string, userId: string) {
 }
 
 module.exports = {
-  deleteUserByName,
+  deleteUserById,
   getAllUsernames,
   getUserByName,
   getUserByEmail,

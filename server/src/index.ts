@@ -7,6 +7,7 @@ const passport = require("passport");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/usersRouter");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 require("./config/passport");
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/dashboard", dashboardRoutes);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);

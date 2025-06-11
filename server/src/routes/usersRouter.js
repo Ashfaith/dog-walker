@@ -12,11 +12,12 @@ router.get("/:id", getUser, (req, res) => {
 });
 
 //Create user
-router.post("/", controller.createUser);
+router.post("/createUser", controller.createUser);
 
 //Update user
 router.patch("/:id", getUser, controller.editUser);
 
+//Change password
 router.patch("/passwordUpdate/:id", getUser, controller.updatePassword);
 
 //Delete user

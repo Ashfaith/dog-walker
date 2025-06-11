@@ -17,7 +17,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/users/6ed89092-3ce0-40f1-88a1-2915600c630e
+DELETE http://localhost:3000/users/0a966a12-5790-45aa-8a41-aa4e1c1e3f90
 
 ###
 PATCH http://localhost:3000/users/82048194-e36e-44ac-ad29-6c0b966ed1bb
@@ -48,3 +48,7 @@ Content-Type: application/json
 {
     "pw": "freddy331"
 }
+
+###
+http://localhost:3000/dashboard/weather
+
