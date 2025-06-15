@@ -7,7 +7,7 @@ import Home from "./components/dashboard/Home";
 import Record from "./components/dashboard/Record";
 import Friends from "./components/dashboard/Friends";
 import Activity from "./components/dashboard/Activity";
-import { AuthContext } from "./components/AuthContext";
+import { AuthContext } from "./components/utils/AuthContext";
 
 function App() {
   const { auth } = useContext(AuthContext);

@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./utils/AuthContext";
 
 function Login() {
   const navigate = useNavigate();

@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./dashboard/wrapper/header/Header";
 import NavBar from "./dashboard/wrapper/navbar/NavBar";
 import "./dashboard.css";
+
+export const WeatherContext = createContext();
 
 function Dashboard() {
   const [weather, setWeather] = useState(null);
@@ -28,9 +30,11 @@ function Dashboard() {
   return (
     <div className="layout">
       <Header />
-      <main>
-        <Outlet />
-      </main>
+      <WeatherContext.Provider value={weather}>
+        <main>
+          <Outlet />
+        </main>
+      </WeatherContext.Provider>
       <NavBar />
     </div>
   );
