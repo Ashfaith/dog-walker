@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 async function fetchWeather(req, res) {
-  const location = "Auckland"; //change to a parameter!!
+  let location = req.query.location;
   const apiKey = process.env.WEATHER_KEY;
   try {
     const response = await axios.get(

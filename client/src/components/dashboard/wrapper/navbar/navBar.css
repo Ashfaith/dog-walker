@@ -1,0 +1,21 @@
+.navContainer {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  width: 100vw;
+  height: 7%;
+}
+
+ul {
+  width: 100%;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
