@@ -6,7 +6,6 @@ function Home() {
 
   return (
     <div>
-      {console.log(weather)}
       {weather !== null ? (
         <div>
           <h1>Current conditions</h1>

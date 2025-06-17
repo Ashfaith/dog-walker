@@ -1,6 +1,6 @@
 const pool = require("./pool");
 import { eq } from "drizzle-orm";
-import { usersTable } from "./schema";
+import { usersTable, posts } from "./schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "./schema";
 import "dotenv/config";
@@ -59,6 +59,10 @@ async function updatePassword(newPassword: string, userId: string) {
     .returning();
 }
 
+async function createPost(title: string, content: string, user_id: string) {
+  return await db.insert(posts).values({ title, content, user_id }).returning();
+}
+
 module.exports = {
   deleteUserById,
   getAllUsernames,
@@ -68,4 +72,5 @@ module.exports = {
   getUserById,
   updateUser,
   updatePassword,
+  createPost,
 };

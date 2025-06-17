@@ -1,4 +1,5 @@
 const axios = require("axios");
+const models = require("../db/models");
 
 async function fetchWeather(req, res) {
   let location = req.query.location;
@@ -15,6 +16,18 @@ async function fetchWeather(req, res) {
   }
 }
 
+async function submitPost(req, res) {
+  try {
+    let { title, content } = req.body;
+    const user = req.user;
+    const post = await models.createPost(title, content, user.id);
+    res.json(post);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   fetchWeather,
+  submitPost,
 };
