@@ -8,6 +8,7 @@ import Record from "./components/dashboard/Record";
 import Friends from "./components/dashboard/Friends";
 import Activity from "./components/dashboard/Activity";
 import { AuthContext } from "./components/utils/AuthContext";
+import { WeatherProvider } from "./components/utils/WeatherContext";
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -17,29 +18,30 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            auth ? (
-              <Navigate to="/dashboard" />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={auth ? <Dashboard /> : <Navigate to="/login" replace />}
-        >
-          <Route index element={<Home />} />
-          <Route path="record" element={<Record />} />
-          <Route path="friends" element={<Friends />} />
-          <Route path="activity" element={<Activity />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes>
+      {auth && (
+        <WeatherProvider>
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route index element={<Home />} />
+              <Route path="record" element={<Record />} />
+              <Route path="friends" element={<Friends />} />
+              <Route path="activity" element={<Activity />} />
+            </Route>
+          </Routes>
+        </WeatherProvider>
+      )}
+      {!auth && (
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route
+            path="/dashboard/*"
+            element={<Navigate to="/login" replace />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 }

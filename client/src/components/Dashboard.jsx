@@ -4,37 +4,39 @@ import Header from "./dashboard/wrapper/header/Header";
 import NavBar from "./dashboard/wrapper/navbar/NavBar";
 import "./dashboard.css";
 
-export const WeatherContext = createContext();
+const strReverse = (str) => {
+  return str.split("").reverse().join("");
+};
+export const PostsContext = createContext();
 
 function Dashboard() {
-  const [weather, setWeather] = useState(null);
-  const [location, setLocation] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation(`${position.coords.latitude},${position.coords.longitude}`);
-        console.log("location:", location);
-      });
-    }
-  });
+    fetch("http://localhost:3000/dashboard/display-posts")
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+  }, []);
 
-  useEffect(() => {
-    if (location !== null) {
-      fetch(`http://localhost:3000/dashboard/weather?location=${location}`)
-        .then((res) => res.json())
-        .then((data) => setWeather(data));
-    }
-  }, [location]);
+  if (posts) {
+    posts.sort((a, b) =>
+      strReverse(a.createdAt).localeCompare(
+        strReverse(b.createdAt),
+        undefined,
+        { numeric: true }
+      )
+    );
+  }
 
   return (
     <div className="layout">
+      {console.log(posts)}
       <Header />
-      <WeatherContext.Provider value={weather}>
+      <PostsContext.Provider value={posts}>
         <main>
           <Outlet />
         </main>
-      </WeatherContext.Provider>
+      </PostsContext.Provider>
       <NavBar />
     </div>
   );

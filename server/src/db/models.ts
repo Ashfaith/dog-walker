@@ -63,6 +63,10 @@ async function createPost(title: string, content: string, user_id: string) {
   return await db.insert(posts).values({ title, content, user_id }).returning();
 }
 
+async function queryPosts() {
+  return await db.select().from(posts).limit(10);
+}
+
 module.exports = {
   deleteUserById,
   getAllUsernames,
@@ -73,4 +77,5 @@ module.exports = {
   updateUser,
   updatePassword,
   createPost,
+  queryPosts,
 };

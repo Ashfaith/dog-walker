@@ -27,7 +27,17 @@ async function submitPost(req, res) {
   }
 }
 
+async function getPosts(req, res) {
+  try {
+    const posts = await models.queryPosts();
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   fetchWeather,
   submitPost,
+  getPosts,
 };
