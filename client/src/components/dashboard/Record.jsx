@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
-import { Icon } from "leaflet";
+import L, { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./record.css";
 import recImage from "../../assets/rec.png";
@@ -23,12 +23,15 @@ function Record() {
 
   const [currentPos, setCurrentPos] = useState(null);
   const [historicalPos, setHistoricalPos] = useState([]);
+  const [distanceTotal, setDistanceTotal] = useState(0);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
-          setCurrentPos([position.coords.latitude, position.coords.longitude]);
+          setCurrentPos(
+            L.latLng(position.coords.latitude, position.coords.longitude)
+          );
         },
         (err) => {
           console.error("Geolocation error:", err);
@@ -43,15 +46,20 @@ function Record() {
     }
   }, []);
 
-  //Check if the current position being sent is the same as the previous position
   const compareArrays = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
   };
-  //If it is the same, dont record it
+
   useEffect(() => {
     if (compareArrays(historicalPos[0], currentPos) || !currentPos) {
       return;
     }
+
+    if (historicalPos[0]) {
+      const distanceDelta = historicalPos[0].distanceTo(currentPos);
+      setDistanceTotal((prev) => prev + distanceDelta);
+    }
+
     setHistoricalPos((prev) => [currentPos, ...prev]);
   }, [currentPos]);
 
@@ -75,7 +83,7 @@ function Record() {
           <Polyline pathOptions={{ color: "blue" }} positions={historicalPos} />
         </MapContainer>
       )}
-      {console.log("position history:", historicalPos)}
+      {console.log("total distance:", distanceTotal)}
       <h1>Create post</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
