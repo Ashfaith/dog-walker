@@ -4,26 +4,35 @@ import L, { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./record.css";
 import recImage from "../../assets/rec.png";
+import MyStopwatch from "../utils/Timer";
 
 function Record() {
-  const [form, setForm] = useState({ title: "", content: "" });
+  const [form, setForm] = useState({
+    title: "",
+    content: "",
+    distance: "",
+    time: "",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/dashboard/createPost", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(form),
-    });
-    if (res.ok) {
-      alert("post created");
-    }
+    // const res = await fetch("http://localhost:3000/dashboard/createPost", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   credentials: "include",
+    //   body: JSON.stringify(form),
+    // });
+    // if (res.ok) {
+    //   alert("post created");
+    // }
+
+    console.log(form);
   };
 
   const [currentPos, setCurrentPos] = useState(null);
   const [historicalPos, setHistoricalPos] = useState([]);
   const [distanceTotal, setDistanceTotal] = useState(0);
+  const [activityTime, setActivityTime] = useState(null);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -83,7 +92,18 @@ function Record() {
           <Polyline pathOptions={{ color: "blue" }} positions={historicalPos} />
         </MapContainer>
       )}
-      {console.log("total distance:", distanceTotal)}
+      <MyStopwatch setActivityTime={setActivityTime} />
+      <button
+        onClick={() =>
+          setForm((prev) => ({
+            ...prev,
+            distance: distanceTotal,
+            time: activityTime,
+          }))
+        }
+      >
+        Finish
+      </button>
       <h1>Create post</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
