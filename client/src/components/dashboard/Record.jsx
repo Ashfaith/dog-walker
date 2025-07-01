@@ -7,7 +7,7 @@ import recImage from "../../assets/rec.png";
 import MyStopwatch from "../utils/Timer";
 
 function Record() {
-  const [form, setForm] = useState({
+  const [post, setPost] = useState({
     title: "",
     content: "",
     distance: "",
@@ -16,17 +16,16 @@ function Record() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const res = await fetch("http://localhost:3000/dashboard/createPost", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   credentials: "include",
-    //   body: JSON.stringify(form),
-    // });
-    // if (res.ok) {
-    //   alert("post created");
-    // }
-
-    console.log(form);
+    const res = await fetch("http://localhost:3000/dashboard/createPost", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(post),
+    });
+    if (res.ok) {
+      alert("post created");
+    }
+    console.log(post);
   };
 
   const [currentPos, setCurrentPos] = useState(null);
@@ -95,7 +94,7 @@ function Record() {
       <MyStopwatch setActivityTime={setActivityTime} />
       <button
         onClick={() =>
-          setForm((prev) => ({
+          setPost((prev) => ({
             ...prev,
             distance: distanceTotal,
             time: activityTime,
@@ -110,18 +109,18 @@ function Record() {
           type="text"
           name="title"
           placeholder="Title"
-          value={form.title}
+          value={post.title}
           onChange={(e) =>
-            setForm((prev) => ({ ...prev, title: e.target.value }))
+            setPost((prev) => ({ ...prev, title: e.target.value }))
           }
         />
         <input
           type="text"
           name="body"
           placeholder="content"
-          value={form.body}
+          value={post.body}
           onChange={(e) =>
-            setForm((prev) => ({ ...prev, content: e.target.value }))
+            setPost((prev) => ({ ...prev, content: e.target.value }))
           }
         />
         <button type="submit" onClick={(e) => handleSubmit(e)}>

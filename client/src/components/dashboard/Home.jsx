@@ -28,6 +28,8 @@ function Home() {
               <p>{post.createdAt}</p>
               <h3>{post.title}</h3>
               <h5>{post.content}</h5>
+              <h5>{post.distance}</h5>
+              <h5>{post.time}</h5>
             </li>
           ))}
         </ul>
