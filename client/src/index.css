@@ -1,11 +1,11 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --text-color: rgba(255, 255, 255, 0.87);
+  --bg-color: #242424;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--bg-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,6 +37,7 @@ h1 {
 
 button {
   border-radius: 8px;
+  color: var(--text-color);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -65,4 +66,27 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.leaflet-container {
+  z-index: 0;
+}
+
+.EZDrawer__container {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  font-family: var(
+    --font-family,
+    system-ui,
+    Avenir,
+    Helvetica,
+    Arial,
+    sans-serif
+  ) !important;
+  z-index: 9999 !important;
+  position: fixed;
+}
+
+.EZDrawer__overlay {
+  z-index: 9998 !important;
 }

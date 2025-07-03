@@ -1,12 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L, { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./record.css";
 import recImage from "../../assets/rec.png";
-import MyStopwatch from "../utils/Timer";
+import Stopwatch from "../utils/Timer";
+import ActivityDrawer from "../utils/ActivityDrawer";
+
+export const DrawerContext = createContext(null);
 
 function Record() {
+  const [currentPos, setCurrentPos] = useState(null);
+  const [historicalPos, setHistoricalPos] = useState([]);
+  const [distanceTotal, setDistanceTotal] = useState(0);
+  const [activityTime, setActivityTime] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState({
     title: "",
     content: "",
@@ -27,11 +35,6 @@ function Record() {
     }
     console.log(post);
   };
-
-  const [currentPos, setCurrentPos] = useState(null);
-  const [historicalPos, setHistoricalPos] = useState([]);
-  const [distanceTotal, setDistanceTotal] = useState(0);
-  const [activityTime, setActivityTime] = useState(null);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -54,6 +57,7 @@ function Record() {
     }
   }, []);
 
+  //Compare the positions. If a new postion then log that.
   const compareArrays = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
   };
@@ -71,11 +75,21 @@ function Record() {
     setHistoricalPos((prev) => [currentPos, ...prev]);
   }, [currentPos]);
 
+  // Custom icon for map. <a href="https://www.flaticon.com/free-icons/dot" title="dot icons">Dot icons created by iconixar - Flaticon</a>
   const customIcon = new Icon({
     iconUrl: recImage,
     iconSize: [30, 30],
   });
-  // <a href="https://www.flaticon.com/free-icons/dot" title="dot icons">Dot icons created by iconixar - Flaticon</a>
+
+  useEffect(() => {
+    if (isOpen) {
+      setPost((prev) => ({
+        ...prev,
+        distance: distanceTotal,
+        time: activityTime,
+      }));
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -91,42 +105,40 @@ function Record() {
           <Polyline pathOptions={{ color: "blue" }} positions={historicalPos} />
         </MapContainer>
       )}
-      <MyStopwatch setActivityTime={setActivityTime} />
-      <button
-        onClick={() =>
-          setPost((prev) => ({
-            ...prev,
-            distance: distanceTotal,
-            time: activityTime,
-          }))
-        }
-      >
-        Finish
-      </button>
-      <h1>Create post</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={post.title}
-          onChange={(e) =>
-            setPost((prev) => ({ ...prev, title: e.target.value }))
-          }
-        />
-        <input
-          type="text"
-          name="body"
-          placeholder="content"
-          value={post.body}
-          onChange={(e) =>
-            setPost((prev) => ({ ...prev, content: e.target.value }))
-          }
-        />
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          POST
-        </button>
-      </form>
+      <DrawerContext.Provider value={isOpen}>
+        <Stopwatch setActivityTime={setActivityTime} setOpen={setIsOpen} />
+        <ActivityDrawer>
+          <>
+            <h1>Create post</h1>
+            <h2>
+              {distanceTotal} {activityTime}
+            </h2>
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                value={post.title}
+                onChange={(e) =>
+                  setPost((prev) => ({ ...prev, title: e.target.value }))
+                }
+              />
+              <input
+                type="text"
+                name="body"
+                placeholder="content"
+                value={post.body}
+                onChange={(e) =>
+                  setPost((prev) => ({ ...prev, content: e.target.value }))
+                }
+              />
+              <button type="submit" onClick={(e) => handleSubmit(e)}>
+                POST
+              </button>
+            </form>
+          </>
+        </ActivityDrawer>
+      </DrawerContext.Provider>
     </>
   );
 }

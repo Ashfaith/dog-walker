@@ -1,29 +1,57 @@
-import { useStopwatch } from "react-timer-hook";
+import { useState, useEffect } from "react";
 
-function MyStopwatch({ setActivityTime }) {
-  const { seconds, minutes, hours, isRunning, start, pause, reset } =
-    useStopwatch({ autoStart: true, interval: 20 });
+const Stopwatch = ({ setActivityTime, setOpen }) => {
+  // state to store time
+  const [time, setTime] = useState(0);
+
+  // state to check stopwatch running or not
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    let intervalId;
+    if (isRunning) {
+      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
+      intervalId = setInterval(() => setTime(time + 1), 10);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning, time]);
+
+  // Hours calculation
+  const hours = Math.floor(time / 360000);
+
+  // Minutes calculation
+  const minutes = Math.floor((time % 360000) / 6000);
+
+  // Seconds calculation
+  const seconds = Math.floor((time % 6000) / 100);
+
+  // Method to start and stop timer
+  const startAndPause = () => {
+    setIsRunning(!isRunning);
+  };
 
   const handleStop = () => {
     const finalTime = `${hours}:${minutes}:${seconds}`;
     setActivityTime(finalTime);
-    console.log("Time sent to parent:", finalTime);
+    setOpen(true);
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>react-timer-hook</h1>
-      <p>Stopwatch Demo</p>
-      <div style={{ fontSize: "100px" }}>
-        <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+    <div className="stopwatch-container">
+      <p className="stopwatch-time">
+        {hours}:{minutes.toString().padStart(2, "0")}:
+        {seconds.toString().padStart(2, "0")}
+      </p>
+      <div className="stopwatch-buttons">
+        <button className="stopwatch-button" onClick={startAndPause}>
+          {isRunning ? "Pause" : "Start"}
+        </button>
+        <button className="stopwatch-button" onClick={handleStop}>
+          Stop
+        </button>
       </div>
-      <p>{isRunning ? "Running" : "Not running"}</p>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={reset}>Reset</button>
-      <button onClick={handleStop}>Stop</button>
     </div>
   );
-}
+};
 
-export default MyStopwatch;
+export default Stopwatch;

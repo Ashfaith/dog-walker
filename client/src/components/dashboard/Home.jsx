@@ -8,6 +8,7 @@ function Home() {
 
   return (
     <>
+      {console.log(posts)}
       <div>
         {weather && weather.current ? (
           <div>
@@ -19,12 +20,11 @@ function Home() {
           <div>Loading...</div>
         )}
       </div>
-
       <main>
         <ul>
           {posts.map((post) => (
             <li key={post.id}>
-              <h4>{post.id}</h4>
+              <h4>{post.userName}</h4>
               <p>{post.createdAt}</p>
               <h3>{post.title}</h3>
               <h5>{post.content}</h5>
