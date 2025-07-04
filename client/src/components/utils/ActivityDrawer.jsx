@@ -1,4 +1,4 @@
-import { Children, useContext } from "react";
+import { useContext } from "react";
 import { DrawerContext } from "../dashboard/Record";
 
 // import component 👇
@@ -8,10 +8,10 @@ import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 
 const ActivityDrawer = ({ children }) => {
-  const isOpen = useContext(DrawerContext);
+  const { isOpen, setIsOpen } = useContext(DrawerContext);
 
   const toggleDrawer = () => {
-    isOpen((prevState) => !prevState);
+    setIsOpen((prevState) => !prevState);
   };
 
   return (
@@ -21,6 +21,7 @@ const ActivityDrawer = ({ children }) => {
       direction="bottom"
       className="activity-drawer"
     >
+      <button onClick={toggleDrawer}>x</button>
       <div className="drawer-content">{children}</div>
     </Drawer>
   );

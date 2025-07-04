@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 const Stopwatch = ({ setActivityTime, setOpen }) => {
+  const [started, setStart] = useState(false);
+
   // state to store time
   const [time, setTime] = useState(0);
 
@@ -27,11 +29,16 @@ const Stopwatch = ({ setActivityTime, setOpen }) => {
 
   // Method to start and stop timer
   const startAndPause = () => {
+    if (!started) {
+      setStart(true);
+    }
     setIsRunning(!isRunning);
   };
 
   const handleStop = () => {
-    const finalTime = `${hours}:${minutes}:${seconds}`;
+    const finalTime = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
     setActivityTime(finalTime);
     setOpen(true);
   };
@@ -43,12 +50,24 @@ const Stopwatch = ({ setActivityTime, setOpen }) => {
         {seconds.toString().padStart(2, "0")}
       </p>
       <div className="stopwatch-buttons">
-        <button className="stopwatch-button" onClick={startAndPause}>
-          {isRunning ? "Pause" : "Start"}
-        </button>
-        <button className="stopwatch-button" onClick={handleStop}>
-          Stop
-        </button>
+        {!started ? (
+          <button className="stopwatch-button" onClick={startAndPause}>
+            Start
+          </button>
+        ) : isRunning ? (
+          <button className="stopwatch-button" onClick={startAndPause}>
+            Pause
+          </button>
+        ) : (
+          <>
+            <button className="stopwatch-button" onClick={startAndPause}>
+              Resume
+            </button>
+            <button className="stopwatch-button" onClick={handleStop}>
+              Stop
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

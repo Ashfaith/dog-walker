@@ -85,6 +85,7 @@ button:focus-visible {
   ) !important;
   z-index: 9999 !important;
   position: fixed;
+  height: 100vh !important;
 }
 
 .EZDrawer__overlay {

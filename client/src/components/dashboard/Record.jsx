@@ -6,6 +6,7 @@ import "./record.css";
 import recImage from "../../assets/rec.png";
 import Stopwatch from "../utils/Timer";
 import ActivityDrawer from "../utils/ActivityDrawer";
+import { convertToKm } from "../utils/helpers";
 
 export const DrawerContext = createContext(null);
 
@@ -69,7 +70,9 @@ function Record() {
 
     if (historicalPos[0]) {
       const distanceDelta = historicalPos[0].distanceTo(currentPos);
-      setDistanceTotal((prev) => prev + distanceDelta);
+      const convertedDelta = convertToKm(distanceDelta);
+      setDistanceTotal((prev) => prev + convertedDelta);
+      console.log("total:", distanceTotal);
     }
 
     setHistoricalPos((prev) => [currentPos, ...prev]);
@@ -93,6 +96,7 @@ function Record() {
 
   return (
     <>
+      {console.log(currentPos)}
       {!currentPos ? (
         <p>fetching location</p>
       ) : (
@@ -105,14 +109,13 @@ function Record() {
           <Polyline pathOptions={{ color: "blue" }} positions={historicalPos} />
         </MapContainer>
       )}
-      <DrawerContext.Provider value={isOpen}>
+      <DrawerContext.Provider value={{ isOpen, setIsOpen }}>
         <Stopwatch setActivityTime={setActivityTime} setOpen={setIsOpen} />
         <ActivityDrawer>
           <>
             <h1>Create post</h1>
-            <h2>
-              {distanceTotal} {activityTime}
-            </h2>
+            <h2>Distance: {distanceTotal}km</h2>
+            <h2>Time: {activityTime}</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
               <input
                 type="text"
