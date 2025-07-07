@@ -1,4 +1,14 @@
-import { pgTable, uuid, varchar, timestamp } from "drizzle-orm/pg-core";
+import {
+  serial,
+  pgTable,
+  uuid,
+  varchar,
+  timestamp,
+  text,
+  check,
+  unique,
+} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const usersTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -15,4 +25,23 @@ export const posts = pgTable("posts", {
     .notNull()
     .references(() => usersTable.id),
   createdAt: timestamp("created_at").defaultNow(),
+  distance: varchar("distance", { length: 255 }).notNull(),
+  time: varchar("time", { length: 255 }).notNull(),
 });
+
+export const userFollow = pgTable(
+  "user_follow",
+  {
+    id: serial("id").primaryKey().notNull(),
+    uid1: uuid("uid1")
+      .notNull()
+      .references(() => usersTable.id),
+    uid2: uuid("uid2")
+      .notNull()
+      .references(() => usersTable.id),
+    status: text("status").notNull(),
+  },
+  (table) => ({
+    uniqueFollow: unique("unique_follow").on(table.uid1, table.uid2),
+  })
+);

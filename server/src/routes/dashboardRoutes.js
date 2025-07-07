@@ -8,4 +8,5 @@ router.get("/weather", controller.fetchWeather);
 router.post("/createPost", controller.submitPost);
 
 router.get("/display-posts", controller.getPosts);
+
 module.exports = router;

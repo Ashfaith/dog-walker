@@ -1,4 +1,3 @@
-const { response } = require("express");
 const models = require("../db/models");
 const bcrypt = require("bcryptjs");
 

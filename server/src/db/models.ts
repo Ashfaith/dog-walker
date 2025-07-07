@@ -1,6 +1,6 @@
 const pool = require("./pool");
 import { eq } from "drizzle-orm";
-import { usersTable, posts } from "./schema";
+import { usersTable, posts, userFollow } from "./schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "./schema";
 import "dotenv/config";
@@ -59,12 +59,37 @@ async function updatePassword(newPassword: string, userId: string) {
     .returning();
 }
 
-async function createPost(title: string, content: string, user_id: string) {
-  return await db.insert(posts).values({ title, content, user_id }).returning();
+async function createPost(
+  title: string,
+  content: string,
+  distance: string,
+  time: string,
+  user_id: string
+) {
+  return await db
+    .insert(posts)
+    .values({ title, content, distance, time, user_id })
+    .returning();
 }
 
 async function queryPosts() {
-  return await db.select().from(posts).limit(10);
+  return await db
+    .select({
+      id: posts.id,
+      title: posts.title,
+      content: posts.content,
+      distance: posts.distance,
+      time: posts.time,
+      userId: posts.user_id,
+      userName: usersTable.name,
+    })
+    .from(posts)
+    .innerJoin(usersTable, eq(posts.user_id, usersTable.id))
+    .limit(10);
+}
+
+async function sendFollowRequest(uid1: string, uid2: string, status: string) {
+  return await db.insert(userFollow).values({ uid1, uid2, status }).returning();
 }
 
 module.exports = {
@@ -78,4 +103,5 @@ module.exports = {
   updatePassword,
   createPost,
   queryPosts,
+  sendFollowRequest,
 };
