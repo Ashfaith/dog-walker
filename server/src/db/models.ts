@@ -1,5 +1,5 @@
 const pool = require("./pool");
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { usersTable, posts, userFollow } from "./schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "./schema";
@@ -92,6 +92,35 @@ async function sendFollowRequest(uid1: string, uid2: string, status: string) {
   return await db.insert(userFollow).values({ uid1, uid2, status }).returning();
 }
 
+async function retrieveFollowRequest(userId: string) {
+  return await db
+    .select()
+    .from(userFollow)
+    .where(and(eq(userFollow.uid1, userId), eq(userFollow.status, "REQ")));
+}
+
+async function approveFollow(userId: string, follower: string) {
+  return await db
+    .update(userFollow)
+    .set({ status: "FOLLOWING" })
+    .where(and(eq(userFollow.uid1, userId), eq(userFollow.uid2, follower)));
+}
+
+async function rejectFollow(userId: string, follower: string) {
+  return await db
+    .delete(userFollow)
+    .where(and(eq(userFollow.uid1, userId), eq(userFollow.uid2, follower)));
+}
+
+async function retrieveAllFollowers(userId: string) {
+  return await db
+    .select()
+    .from(userFollow)
+    .where(
+      and(eq(userFollow.uid1, userId), eq(userFollow.status, "FOLLOWING"))
+    );
+}
+
 module.exports = {
   deleteUserById,
   getAllUsernames,
@@ -104,4 +133,8 @@ module.exports = {
   createPost,
   queryPosts,
   sendFollowRequest,
+  retrieveFollowRequest,
+  approveFollow,
+  rejectFollow,
+  retrieveAllFollowers,
 };

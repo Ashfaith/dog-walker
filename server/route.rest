@@ -55,10 +55,7 @@ http://localhost:3000/dashboard/weather
 
 ###
 POST http://localhost:3000/followers/request
-Content-Type: application/json
 
-{
-    "uid1": "9e0beb8f-81a7-4378-b7c3-51e046a09b8e",
-    "uid2": "642f1c5a-d5da-4f5e-a059-26f012a71b6b",
-    "status": "REQ"
-}
+###
+
+GET  http://localhost:3000/followers/view-requests
