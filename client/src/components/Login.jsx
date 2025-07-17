@@ -19,7 +19,6 @@ function Login() {
 
     if (res.ok) {
       setAuth(true);
-      console.log("logged in, navigating to dashboard");
       navigate("/dashboard");
     } else alert("Login failed");
   };

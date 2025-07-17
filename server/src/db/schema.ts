@@ -7,6 +7,7 @@ import {
   text,
   check,
   unique,
+  boolean,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
@@ -39,7 +40,7 @@ export const userFollow = pgTable(
     uid2: uuid("uid2")
       .notNull()
       .references(() => usersTable.id),
-    status: text("status").notNull(),
+    approve: boolean().notNull(),
   },
   (table) => ({
     uniqueFollow: unique("unique_follow").on(table.uid1, table.uid2),

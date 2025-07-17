@@ -1,0 +1,1 @@
+ALTER TABLE "user_follow" RENAME COLUMN "approve_on" TO "approve";

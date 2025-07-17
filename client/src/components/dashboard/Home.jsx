@@ -8,7 +8,6 @@ function Home() {
 
   return (
     <>
-      {console.log(posts)}
       <div>
         {weather && weather.current ? (
           <div>

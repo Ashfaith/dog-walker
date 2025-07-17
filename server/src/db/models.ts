@@ -88,21 +88,28 @@ async function queryPosts() {
     .limit(10);
 }
 
-async function sendFollowRequest(uid1: string, uid2: string, status: string) {
-  return await db.insert(userFollow).values({ uid1, uid2, status }).returning();
+async function sendFollowRequest(uid1: string, uid2: string, approve: boolean) {
+  return await db
+    .insert(userFollow)
+    .values({ uid1, uid2, approve })
+    .returning();
 }
 
 async function retrieveFollowRequest(userId: string) {
   return await db
-    .select()
+    .select({
+      requesterId: userFollow.uid1,
+      requesterName: usersTable.name,
+    })
     .from(userFollow)
-    .where(and(eq(userFollow.uid1, userId), eq(userFollow.status, "REQ")));
+    .innerJoin(usersTable, eq(userFollow.uid1, usersTable.id))
+    .where(and(eq(userFollow.uid2, userId), eq(userFollow.approve, false)));
 }
 
 async function approveFollow(userId: string, follower: string) {
   return await db
     .update(userFollow)
-    .set({ status: "FOLLOWING" })
+    .set({ approve: true })
     .where(and(eq(userFollow.uid1, userId), eq(userFollow.uid2, follower)));
 }
 
@@ -116,9 +123,7 @@ async function retrieveAllFollowers(userId: string) {
   return await db
     .select()
     .from(userFollow)
-    .where(
-      and(eq(userFollow.uid1, userId), eq(userFollow.status, "FOLLOWING"))
-    );
+    .where(and(eq(userFollow.uid1, userId), eq(userFollow.approve, true)));
 }
 
 module.exports = {

@@ -6,12 +6,12 @@ GET http://localhost:3000/users/b4037141-dc2a-44f5-9d52-a0ec80d6af09
 
 ###
 
-POST http://localhost:3000/users/
+POST http://localhost:3000/users/createUser
 Content-Type: application/json
 
 {
-    "name": "Alfie",
-    "email": "alf.fred@gmail.com",
+    "name": "Test",
+    "email": "test.fred@gmail.com",
     "pw": "freddy331"
 }
 
@@ -20,7 +20,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/users/0a966a12-5790-45aa-8a41-aa4e1c1e3f90
 
 ###
-PATCH http://localhost:3000/users/82048194-e36e-44ac-ad29-6c0b966ed1bb
+PATCH http://localhost:3000/users/7bcdefa4-3f13-4e8b-a630-8a96cf767a5f
 Content-Type: application/json
 
 {

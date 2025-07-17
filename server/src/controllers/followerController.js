@@ -1,12 +1,11 @@
-const { response } = require("express");
 const models = require("../db/models");
 
 async function sendFollowerRequest(req, res) {
   try {
     const uid2 = req.body;
     const uid1 = req.user;
-    const status = "REQ";
-    const request = await models.sendFollowRequest(uid1.id, uid2, status);
+    const approve = false;
+    const request = await models.sendFollowRequest(uid1.id, uid2.id, approve);
     res.json(request);
   } catch (err) {
     if (err.code === "23505") {

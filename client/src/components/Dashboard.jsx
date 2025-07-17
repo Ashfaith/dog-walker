@@ -30,7 +30,6 @@ function Dashboard() {
 
   return (
     <div className="layout">
-      {console.log(posts)}
       <Header />
       <PostsContext.Provider value={posts}>
         <main>

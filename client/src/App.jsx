@@ -13,7 +13,6 @@ import { WeatherProvider } from "./components/utils/WeatherContext";
 function App() {
   const { auth } = useContext(AuthContext);
 
-  console.log(auth);
   if (auth === null) return <div>Loading...</div>;
 
   return (

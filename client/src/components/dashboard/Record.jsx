@@ -34,7 +34,6 @@ function Record() {
     if (res.ok) {
       alert("post created");
     }
-    console.log(post);
   };
 
   useEffect(() => {
@@ -72,7 +71,6 @@ function Record() {
       const distanceDelta = historicalPos[0].distanceTo(currentPos);
       const convertedDelta = convertToKm(distanceDelta);
       setDistanceTotal((prev) => prev + convertedDelta);
-      console.log("total:", distanceTotal);
     }
 
     setHistoricalPos((prev) => [currentPos, ...prev]);
@@ -96,7 +94,6 @@ function Record() {
 
   return (
     <>
-      {console.log(currentPos)}
       {!currentPos ? (
         <p>fetching location</p>
       ) : (
