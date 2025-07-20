@@ -2,6 +2,7 @@ const pool = require("./pool");
 import { eq, and } from "drizzle-orm";
 import { usersTable, posts, userFollow } from "./schema";
 import { drizzle } from "drizzle-orm/node-postgres";
+import { alias } from "drizzle-orm/pg-core";
 import * as schema from "./schema";
 import "dotenv/config";
 
@@ -98,7 +99,8 @@ async function sendFollowRequest(uid1: string, uid2: string, approve: boolean) {
 async function retrieveFollowRequest(userId: string) {
   return await db
     .select({
-      requesterId: userFollow.uid1,
+      requestId: userFollow.id,
+      followerId: userFollow.uid1,
       requesterName: usersTable.name,
     })
     .from(userFollow)
@@ -106,24 +108,35 @@ async function retrieveFollowRequest(userId: string) {
     .where(and(eq(userFollow.uid2, userId), eq(userFollow.approve, false)));
 }
 
-async function approveFollow(userId: string, follower: string) {
+async function approveFollow(reqId: number) {
   return await db
     .update(userFollow)
     .set({ approve: true })
-    .where(and(eq(userFollow.uid1, userId), eq(userFollow.uid2, follower)));
+    .where(eq(userFollow.id, reqId));
 }
 
-async function rejectFollow(userId: string, follower: string) {
+async function rejectFollow(follower: string, userId: string) {
   return await db
     .delete(userFollow)
-    .where(and(eq(userFollow.uid1, userId), eq(userFollow.uid2, follower)));
+    .where(and(eq(userFollow.uid1, follower), eq(userFollow.uid2, userId)));
 }
 
 async function retrieveAllFollowers(userId: string) {
+  const followBack = alias(userFollow, "followBack");
+
   return await db
-    .select()
+    .select({
+      followerId: userFollow.uid1,
+      name: usersTable.name,
+      following: followBack.approve,
+    })
     .from(userFollow)
-    .where(and(eq(userFollow.uid1, userId), eq(userFollow.approve, true)));
+    .innerJoin(usersTable, eq(userFollow.uid1, usersTable.id))
+    .leftJoin(
+      followBack,
+      and(eq(followBack.uid1, userId), eq(followBack.uid2, userFollow.uid1))
+    )
+    .where(and(eq(userFollow.uid2, userId), eq(userFollow.approve, true)));
 }
 
 module.exports = {

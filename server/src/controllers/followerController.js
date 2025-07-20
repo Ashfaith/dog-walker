@@ -26,18 +26,20 @@ async function viewFollowRequests(req, res) {
 }
 
 async function actionRequest(req, res) {
-  const user = req.user;
-  const { action, follower } = req.body;
+  if (!req.user) {
+    return console.log("not signed in");
+  }
+  const { action, requestId } = req.body;
   if (action) {
     try {
-      const allow = await models.approveFollow(user.id, follower);
+      const allow = await models.approveFollow(requestId);
       res.json(allow);
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   } else {
     try {
-      const reject = await models.rejectFollow(user.id, follower);
+      const reject = await models.rejectFollow(reqId);
       res.json(reject);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -48,7 +50,8 @@ async function actionRequest(req, res) {
 async function allFollowers(req, res) {
   const user = req.user;
   try {
-    await models.retrieveAllFollowers(user.id);
+    const data = await models.retrieveAllFollowers(user.id);
+    res.json(data);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

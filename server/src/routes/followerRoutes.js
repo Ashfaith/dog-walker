@@ -6,8 +6,8 @@ router.post("/request", controller.sendFollowerRequest);
 
 router.get("/view-requests", controller.viewFollowRequests);
 
-router.get("/followers", controller.allFollowers);
+router.get("/all-followers", controller.allFollowers);
 
-router.post("/action-request", controller.actionRequest);
+router.patch("/action-request", controller.actionRequest);
 
 module.exports = router;
