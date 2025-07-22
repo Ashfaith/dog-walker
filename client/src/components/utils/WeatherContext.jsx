@@ -33,6 +33,7 @@ export function WeatherProvider({ children }) {
 
   return (
     <>
+      {console.log(weather)}
       <WeatherContext.Provider value={{ weather, setWeather }}>
         {children}
       </WeatherContext.Provider>

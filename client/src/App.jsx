@@ -9,6 +9,7 @@ import Friends from "./components/dashboard/Friends";
 import Activity from "./components/dashboard/Activity";
 import { AuthContext } from "./components/utils/AuthContext";
 import { WeatherProvider } from "./components/utils/WeatherContext";
+import PeopleSearch from "./components/dashboard/PeopleSearch";
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -26,6 +27,7 @@ function App() {
               <Route path="record" element={<Record />} />
               <Route path="friends" element={<Friends />} />
               <Route path="activity" element={<Activity />} />
+              <Route path="people-search" element={<PeopleSearch />} />
             </Route>
           </Routes>
         </WeatherProvider>

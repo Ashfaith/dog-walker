@@ -59,7 +59,32 @@ async function updatePassword(req, res) {
     const hashedPassword = await bcrypt.hash(req.body.pw, 10);
     const updatedUser = await models.updatePassword(hashedPassword, user.id);
     res.json(updatedUser);
-    // res.redirect("/");
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
+
+async function usersByName(req, res) {
+  if (!req.user) return;
+
+  const { name } = req.query;
+  const id = req.user.id;
+  try {
+    const foundUsers = await models.getUsersByName(name, id);
+    res.json(foundUsers);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
+
+async function usersByEmail(req, res) {
+  if (!req.user) return;
+
+  const { email } = req.query;
+  const id = req.user.id;
+  try {
+    const foundUsers = await models.getUsersByEmail(email, id);
+    res.json(foundUsers);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -71,4 +96,6 @@ module.exports = {
   createUser,
   editUser,
   updatePassword,
+  usersByEmail,
+  usersByName,
 };

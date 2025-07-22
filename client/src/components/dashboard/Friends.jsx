@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 function Friends() {
   // get follower requests
@@ -18,25 +19,6 @@ function Friends() {
 
   useEffect(() => {
     showFollowRequests();
-  }, []);
-
-  //get suggetions
-  const [suggested, setSuggested] = useState([]);
-
-  const getPeople = async () => {
-    const res = await fetch("http://localhost:3000/users", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    if (res.ok) {
-      const data = await res.json();
-      setSuggested(data);
-    }
-  };
-
-  useEffect(() => {
-    getPeople();
   }, []);
 
   //get followers
@@ -114,12 +96,11 @@ function Friends() {
 
   return (
     <>
-      {console.log("followers:", followers)}
-      <h3>Follow Requests</h3>
-      <ul>
-        {!requests
-          ? null
-          : requests.map((request, index) => (
+      {!requests || requests.length <= 0 ? null : (
+        <div className="requests-container">
+          <h3>Requests</h3>
+          <ul>
+            {requests.map((request, index) => (
               <li key={index}>
                 <h4>{request.requesterName}</h4>
                 <button onClick={() => handleRequest(true, request.requestId)}>
@@ -130,15 +111,10 @@ function Friends() {
                 </button>
               </li>
             ))}
-      </ul>
-      <ul>
-        {suggested.map((person, index) => (
-          <li key={index}>
-            {person.name}
-            <button onClick={() => sendFollowRequest(person.id)}>Follow</button>
-          </li>
-        ))}
-      </ul>
+          </ul>
+        </div>
+      )}
+
       <h3>Followers</h3>
       <ul>
         {!followers
@@ -160,6 +136,8 @@ function Friends() {
               </li>
             ))}
       </ul>
+
+      <Link to="/dashboard/people-search">Search People</Link>
     </>
   );
 }

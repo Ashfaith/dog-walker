@@ -1,5 +1,5 @@
 const pool = require("./pool");
-import { eq, and } from "drizzle-orm";
+import { eq, and, ilike, or, not } from "drizzle-orm";
 import { usersTable, posts, userFollow } from "./schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { alias } from "drizzle-orm/pg-core";
@@ -9,16 +9,30 @@ import "dotenv/config";
 export const db = drizzle(pool, { schema });
 
 async function getAllUsernames() {
-  return await db.select().from(usersTable);
+  return await db
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+    })
+    .from(usersTable);
 }
 
 async function insertUser(name: string, email: string, pw: string) {
-  return await db.insert(usersTable).values({ name, email, pw }).returning();
+  return await db.insert(usersTable).values({ name, email, pw }).returning({
+    id: usersTable.id,
+    name: usersTable.name,
+    email: usersTable.email,
+  });
 }
 
 async function getUserById(userId: string) {
   return await db
-    .select()
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+    })
     .from(usersTable)
     .where(eq(usersTable.id, userId))
     .then((res) => res[0]);
@@ -26,10 +40,48 @@ async function getUserById(userId: string) {
 
 async function getUserByName(userName: string) {
   return await db
-    .select()
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+    })
     .from(usersTable)
     .where(eq(usersTable.name, userName))
     .then((res) => res[0]);
+}
+
+async function getUsersByName(userName: string, userId: string) {
+  const follows = alias(userFollow, "follows");
+  const followedBy = alias(userFollow, "followedBy");
+
+  return await db
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+      follows: follows.approve,
+      followedBy: followedBy.approve,
+    })
+    .from(usersTable)
+    .leftJoin(
+      follows,
+      and(eq(follows.uid1, userId), eq(follows.uid2, usersTable.id))
+    )
+    .leftJoin(
+      followedBy,
+      and(eq(followedBy.uid1, usersTable.id), eq(followedBy.uid2, userId))
+    )
+    .where(
+      and(
+        or(
+          eq(usersTable.name, userName),
+          ilike(usersTable.name, `${userName}%`),
+          ilike(usersTable.name, `%${userName}`),
+          ilike(usersTable.name, `%${userName}%`)
+        ),
+        not(eq(usersTable.id, userId))
+      )
+    );
 }
 
 async function getUserByEmail(email: string) {
@@ -40,8 +92,41 @@ async function getUserByEmail(email: string) {
     .then((res) => res[0]);
 }
 
+async function getUsersByEmail(email: string, userId: string) {
+  const follows = alias(userFollow, "follows");
+  const followedBy = alias(userFollow, "followedBy");
+
+  return await db
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+      follows: follows.approve,
+      followedBy: followedBy.approve,
+    })
+    .from(usersTable)
+    .leftJoin(
+      follows,
+      and(eq(follows.uid1, userId), eq(follows.uid2, usersTable.id))
+    )
+    .leftJoin(
+      followedBy,
+      and(eq(followedBy.uid1, usersTable.id), eq(followedBy.uid2, userId))
+    )
+    .where(
+      and(
+        or(eq(usersTable.email, email), ilike(usersTable.email, `%${email}`)),
+        not(eq(usersTable.id, userId))
+      )
+    );
+}
+
 async function deleteUserById(id: string) {
-  return await db.delete(usersTable).where(eq(usersTable.id, id)).returning();
+  return await db.delete(usersTable).where(eq(usersTable.id, id)).returning({
+    id: usersTable.id,
+    name: usersTable.name,
+    email: usersTable.email,
+  });
 }
 
 async function updateUser(newName: string, userId: string) {
@@ -49,7 +134,11 @@ async function updateUser(newName: string, userId: string) {
     .update(usersTable)
     .set({ name: newName })
     .where(eq(usersTable.id, userId))
-    .returning();
+    .returning({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+    });
 }
 
 async function updatePassword(newPassword: string, userId: string) {
@@ -57,7 +146,11 @@ async function updatePassword(newPassword: string, userId: string) {
     .update(usersTable)
     .set({ pw: newPassword })
     .where(eq(usersTable.id, userId))
-    .returning();
+    .returning({
+      id: usersTable.id,
+      name: usersTable.name,
+      email: usersTable.email,
+    });
 }
 
 async function createPost(
@@ -143,7 +236,9 @@ module.exports = {
   deleteUserById,
   getAllUsernames,
   getUserByName,
+  getUsersByName,
   getUserByEmail,
+  getUsersByEmail,
   insertUser,
   getUserById,
   updateUser,

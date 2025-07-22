@@ -3,6 +3,17 @@ const router = express.Router();
 const controller = require("../controllers/userController");
 const models = require("../db/models");
 
+//user searches
+router.get("/users-by-name", controller.usersByName);
+
+router.get("/users-by-email", controller.usersByEmail);
+
+//Create user
+router.post("/createUser", controller.createUser);
+
+//Change password
+router.patch("/passwordUpdate/:id", getUser, controller.updatePassword);
+
 router.get("/", controller.listAllUsers);
 
 //Load user
@@ -11,14 +22,8 @@ router.get("/:id", getUser, (req, res) => {
   res.json(user);
 });
 
-//Create user
-router.post("/createUser", controller.createUser);
-
 //Update user
 router.patch("/:id", getUser, controller.editUser);
-
-//Change password
-router.patch("/passwordUpdate/:id", getUser, controller.updatePassword);
 
 //Delete user
 router.delete("/:id", getUser, controller.deleteUser);
