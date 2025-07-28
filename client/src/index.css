@@ -1,7 +1,8 @@
 :root {
   --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   --text-color: rgba(255, 255, 255, 0.87);
-  --bg-color: #242424;
+  --bg-color: #1f1f1f;
+  --info-size: 12px;
 
   font-family: var(--font-family);
   color: var(--text-color);
@@ -11,6 +12,17 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+p {
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -33,6 +45,19 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
 button {
@@ -90,4 +115,20 @@ button:focus-visible {
 
 .EZDrawer__overlay {
   z-index: 9998 !important;
+}
+
+/* (phones, 600px and down) */
+@media (max-width: 600px) {
+}
+
+/* (tablets, 601px to 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+}
+
+/* (laptops, 769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+}
+
+/* (desktops, 1025px and up) */
+@media (min-width: 1025px) {
 }

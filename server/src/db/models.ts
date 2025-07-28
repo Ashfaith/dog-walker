@@ -171,6 +171,7 @@ async function queryPosts() {
     .select({
       id: posts.id,
       title: posts.title,
+      created: posts.createdAt,
       content: posts.content,
       distance: posts.distance,
       time: posts.time,

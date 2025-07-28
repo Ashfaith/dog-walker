@@ -1,18 +1,7 @@
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-}
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
+.post-cont {
+  background-color: #2a2a2a;
+  width: 100%;
+  margin-bottom: 5px;
+  border-top: 1px solid #252525;
+  border-bottom: 1px solid #252525;
 }

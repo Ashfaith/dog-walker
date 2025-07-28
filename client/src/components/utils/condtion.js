@@ -1,4 +1,4 @@
-export const condtion = {
+export const condition = {
   Sunny: {
     type: "sun",
     advice: "Great walking weather! Just bring water if it’s a warm day.",

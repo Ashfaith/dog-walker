@@ -1,0 +1,68 @@
+.forecast {
+  border-bottom: 1px solid #252525;
+}
+
+.forecast-heading {
+  margin: 20px;
+}
+
+h5 {
+  margin: 10px 0 10px 0;
+}
+
+.cond-text-cont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0 15px 0;
+}
+
+.weather-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.stats-cont {
+  display: flex;
+  flex-direction: row;
+}
+
+.content-container {
+  margin: 1.5rem 6rem 1rem 1.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.post-user-info > p {
+  font-size: var(--info-size);
+}
+
+.title-desc-cont {
+  margin: 0.8rem 0 0.8rem 0;
+}
+
+.post-description {
+  font-size: var(--info-size);
+}
+
+.stats-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.stats-box > p {
+  font-size: var(--info-size);
+}
+
+.stats-box > h5 {
+  margin: 0.2rem 0;
+}
