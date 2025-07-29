@@ -2,8 +2,12 @@
   border-bottom: 1px solid #252525;
 }
 
+.forecast-content {
+  margin: 1.1rem 1.8rem 1.1rem 1.8rem;
+}
+
 .forecast-heading {
-  margin: 20px;
+  margin: 1rem 0 1rem 0;
 }
 
 h5 {
@@ -15,7 +19,7 @@ h5 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 18px 0 15px 0;
+  margin: 1rem 0 1rem 0;
 }
 
 .weather-cont {

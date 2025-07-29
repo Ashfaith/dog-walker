@@ -28,6 +28,10 @@ export const condition = {
     advice:
       "Light rain—quick walks are okay if your dog doesn’t mind getting a little wet.",
   },
+  "Light rain shower": {
+    type: "rain",
+    advice: "Better to keep walks short or wait for a break in the rain.",
+  },
   "Moderate rain": {
     type: "rain",
     advice: "Better to keep walks short or wait for a break in the rain.",

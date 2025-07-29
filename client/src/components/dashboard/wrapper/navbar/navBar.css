@@ -4,6 +4,9 @@
   background-color: grey;
   width: 100vw;
   height: 7%;
+  z-index: 9999;
+  position: fixed;
+  bottom: 0;
 }
 
 ul {

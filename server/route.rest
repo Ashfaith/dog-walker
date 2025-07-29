@@ -20,7 +20,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/users/0a966a12-5790-45aa-8a41-aa4e1c1e3f90
 
 ###
-PATCH http://localhost:3000/users/7bcdefa4-3f13-4e8b-a630-8a96cf767a5f
+PATCH http://localhost:3000/users/642f1c5a-d5da-4f5e-a059-26f012a71b6b
 Content-Type: application/json
 
 {

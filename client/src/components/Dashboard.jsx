@@ -30,7 +30,7 @@ function Dashboard() {
 
   return (
     <div className="layout">
-      <Header />
+      <Header className="header" />
       <PostsContext.Provider value={posts}>
         <main className="content">
           <Outlet />

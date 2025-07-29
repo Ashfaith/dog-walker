@@ -5,3 +5,11 @@
   border-top: 1px solid #252525;
   border-bottom: 1px solid #252525;
 }
+
+.header {
+  z-index: 1;
+}
+
+.navbar {
+  z-index: 9999;
+}

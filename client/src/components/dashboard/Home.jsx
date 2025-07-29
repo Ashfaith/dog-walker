@@ -24,25 +24,27 @@ function Home() {
     <>
       <div>
         {weather && weather.current ? (
-          <div className="post-cont forecast">
-            <h4 className="forecast-heading">Todays walking forecast</h4>
+          <section className="post-cont forecast">
+            <div className="forecast-content">
+              <h4 className="forecast-heading">Todays walking forecast</h4>
 
-            <div className="weather-cont">
-              <div className="weather-data-box">
-                <h5>Temperature</h5>
-                <p>{weather.current.temp_c} C</p>
+              <div className="weather-cont">
+                <div className="weather-data-box">
+                  <h5>Temperature</h5>
+                  <p>{weather.current.temp_c} C</p>
+                </div>
+
+                <div className="weather-data-box">
+                  <h5>Conditions</h5>
+                  <p>{weather.current.condition.text}</p>
+                </div>
               </div>
 
-              <div className="weather-data-box">
-                <h5>Conditions</h5>
-                <p>{weather.current.condition.text}</p>
+              <div className="cond-text-cont">
+                <p className="conditions-text">{walkingConditions}</p>
               </div>
             </div>
-
-            <div className="cond-text-cont">
-              <p className="conditions-text">{walkingConditions}</p>
-            </div>
-          </div>
+          </section>
         ) : (
           <div>Loading...</div>
         )}
