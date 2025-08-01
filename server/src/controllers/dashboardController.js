@@ -1,5 +1,6 @@
 const axios = require("axios");
 const models = require("../db/models");
+const { response } = require("express");
 
 async function fetchWeather(req, res) {
   let location = req.query.location;
@@ -42,8 +43,24 @@ async function getPosts(req, res) {
   }
 }
 
+async function fetchMap(req, res) {
+  const token = process.env.JAWG_TOKEN;
+  const { z, x, y } = req.params;
+  try {
+    const response = await axios.get(
+      `https://tile.jawg.io/jawg-dark/${z}/${x}/${y}.png?access-token=${token}`,
+      { responseType: "arraybuffer" }
+    );
+    res.setHeader("Content-Type", "image/png");
+    res.send(response.data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   fetchWeather,
   submitPost,
   getPosts,
+  fetchMap,
 };

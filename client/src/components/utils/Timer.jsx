@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Stopwatch = ({ setActivityTime, setOpen }) => {
+const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
   const [started, setStart] = useState(false);
 
   // state to store time
@@ -49,6 +49,7 @@ const Stopwatch = ({ setActivityTime, setOpen }) => {
         {hours}:{minutes.toString().padStart(2, "0")}:
         {seconds.toString().padStart(2, "0")}
       </p>
+
       <div className="stopwatch-buttons">
         {!started ? (
           <button className="stopwatch-button" onClick={startAndPause}>
@@ -69,6 +70,8 @@ const Stopwatch = ({ setActivityTime, setOpen }) => {
           </>
         )}
       </div>
+
+      <p className="distance">{distance.toFixed(2)}km</p>
     </div>
   );
 };

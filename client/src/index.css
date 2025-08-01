@@ -51,6 +51,8 @@ h1 {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
+  z-index: 9999;
 }
 
 .content {
@@ -91,10 +93,6 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
-
-.leaflet-container {
-  z-index: 0;
 }
 
 .EZDrawer__container {

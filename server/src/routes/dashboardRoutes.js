@@ -9,4 +9,6 @@ router.post("/createPost", controller.submitPost);
 
 router.get("/display-posts", controller.getPosts);
 
+router.get("/map/:z/:x/:y", controller.fetchMap);
+
 module.exports = router;

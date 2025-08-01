@@ -23,6 +23,10 @@ export const condition = {
     type: "light_rain",
     advice: "Keep an umbrella handy—short walks are okay between showers.",
   },
+  "Patchy rain nearby": {
+    type: "light_rain",
+    advice: "Keep an umbrella handy—short walks are okay between showers.",
+  },
   "Light rain": {
     type: "rain",
     advice:

@@ -99,7 +99,7 @@ function Record() {
       ) : (
         <MapContainer center={currentPos} zoom={17}>
           <TileLayer
-            url="https://tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=5bjSihbY1CAdZjto1Tg1UGnZtv771LKjuLzSLzvPHIyFHBHTPapWmp58vb5kSdLA"
+            url="http://localhost:3000/dashboard/map/{z}/{x}/{y}"
             attribution='<a href="https://www.jawg.io?utm_medium=map&utm_source=attribution" target="_blank">&copy; Jawg</a> - <a href="https://www.openstreetmap.org?utm_medium=map-attribution&utm_source=jawg" target="_blank">&copy; OpenStreetMap</a>&nbsp;contributors'
           />
           <Marker position={currentPos} icon={customIcon} />
@@ -107,7 +107,11 @@ function Record() {
         </MapContainer>
       )}
       <DrawerContext.Provider value={{ isOpen, setIsOpen }}>
-        <Stopwatch setActivityTime={setActivityTime} setOpen={setIsOpen} />
+        <Stopwatch
+          setActivityTime={setActivityTime}
+          setOpen={setIsOpen}
+          distance={distanceTotal}
+        />
         <ActivityDrawer>
           <>
             <h1>Create post</h1>
