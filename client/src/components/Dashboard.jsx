@@ -32,8 +32,10 @@ function Dashboard() {
     <div className="layout">
       <Header className="header" />
       <PostsContext.Provider value={posts}>
-        <main className="content">
+        <main className="main">
+          <div className="main-content">
           <Outlet />
+          </div>
         </main>
       </PostsContext.Provider>
       <NavBar />

@@ -7,7 +7,7 @@
 
 .stopwatch-container {
   position: absolute;
-  bottom: 0.8rem;
+  bottom: 5%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
@@ -17,4 +17,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.stopwatch-buttons {
+  width: 113px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }

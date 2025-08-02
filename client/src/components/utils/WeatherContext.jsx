@@ -34,8 +34,6 @@ export function WeatherProvider({ children }) {
   return (
     <>
       <WeatherContext.Provider value={{ weather, setWeather }}>
-        {console.log("location:", location)}
-        {console.log("weather:", weather)}
         {children}
       </WeatherContext.Provider>
     </>

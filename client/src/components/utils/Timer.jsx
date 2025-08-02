@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaPlay, FaStop, FaPause } from "react-icons/fa";
 
 const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
   const [started, setStart] = useState(false);
@@ -53,19 +54,19 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
       <div className="stopwatch-buttons">
         {!started ? (
           <button className="stopwatch-button" onClick={startAndPause}>
-            Start
+            <FaPlay />
           </button>
         ) : isRunning ? (
           <button className="stopwatch-button" onClick={startAndPause}>
-            Pause
+            <FaPause />
           </button>
         ) : (
           <>
             <button className="stopwatch-button" onClick={startAndPause}>
-              Resume
+              <FaPlay />
             </button>
             <button className="stopwatch-button" onClick={handleStop}>
-              Stop
+              <FaStop />
             </button>
           </>
         )}
