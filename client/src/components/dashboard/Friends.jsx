@@ -101,6 +101,9 @@ function Friends() {
 
   return (
     <div className="friends-content">
+      <Link to="/dashboard/people-search">
+      <input className="search-bar" placeholder="Search people"/>
+      </Link>
     {console.log(requests)}
       {!requests || requests.length <= 0 ? null : (
         <div className="requests-container">
@@ -142,8 +145,6 @@ function Friends() {
               </li>
             ))}
       </ul>
-
-      <Link to="/dashboard/people-search">Search People</Link>
     </div>
   );
 }

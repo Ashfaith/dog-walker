@@ -39,7 +39,7 @@ async function actionRequest(req, res) {
     }
   } else {
     try {
-      const reject = await models.rejectFollow(reqId);
+      const reject = await models.rejectFollow(requestId);
       res.json(reject);
     } catch (err) {
       res.status(500).json({ message: err.message });

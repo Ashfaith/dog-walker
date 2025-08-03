@@ -209,10 +209,10 @@ async function approveFollow(reqId: number) {
     .where(eq(userFollow.id, reqId));
 }
 
-async function rejectFollow(follower: string, userId: string) {
+async function rejectFollow(reqId: number) {
   return await db
     .delete(userFollow)
-    .where(and(eq(userFollow.uid1, follower), eq(userFollow.uid2, userId)));
+    .where(eq(userFollow.id, reqId));
 }
 
 async function retrieveAllFollowers(userId: string) {
