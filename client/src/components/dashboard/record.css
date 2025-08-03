@@ -28,3 +28,34 @@
   justify-content: center;
   flex-direction: row;
 }
+
+.stopwatch-button {
+  width: 56px;
+  transition: transform 0.4s ease;
+  margin: 0 5px;
+}
+
+.play {
+  background-color: blue;
+}
+
+.pause {
+  background-color: aliceblue;
+}
+
+.play, .pause {
+  z-index: 1;
+}
+
+.stop {
+  z-index: 0;
+  background-color: red;
+}
+
+.slide-left {
+  transform: translateX(28px);
+}
+
+.slide-right {
+  transform: translateX(-38px);
+}

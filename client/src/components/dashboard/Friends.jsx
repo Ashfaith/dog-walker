@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import { IoIosClose } from "react-icons/io";
+import "./friends.css";
 
 function Friends() {
   // get follower requests
@@ -88,27 +90,31 @@ function Friends() {
 
       if (res.ok) {
         console.log(data);
-      }
-    } catch (err) {
-      console.error(err);
+    } else {
+      console.error("Server error:", res.status, data?.message || data);
     }
-  };
+  } catch (err) {
+    console.error("Network or parsing error:", err);
+    console.log(err.message);
+  }
+};
 
   return (
-    <>
+    <div className="friends-content">
+    {console.log(requests)}
       {!requests || requests.length <= 0 ? null : (
         <div className="requests-container">
           <h3>Requests</h3>
           <ul>
             {requests.map((request, index) => (
-              <li key={index}>
+              <li className="request-alert" key={index}>
                 <h4>{request.requesterName}</h4>
-                <button onClick={() => handleRequest(true, request.requestId)}>
+                <div className="button-container">
+                <button className="accept" onClick={() => handleRequest(true, request.requestId)}>
                   Accept
                 </button>
-                <button onClick={() => handleRequest(false, request.requestId)}>
-                  Reject
-                </button>
+                <IoIosClose className="deny-button" onClick={() => handleRequest(false, request.requestId)} />
+                </div>
               </li>
             ))}
           </ul>
@@ -138,7 +144,7 @@ function Friends() {
       </ul>
 
       <Link to="/dashboard/people-search">Search People</Link>
-    </>
+    </div>
   );
 }
 

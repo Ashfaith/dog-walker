@@ -1,0 +1,35 @@
+.friends-content {
+    margin: 20px;
+}
+
+.requests-container > h3 {
+    margin: 8px 0 8px 0;
+}
+
+.request-alert {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin: 5px 0 5px 0;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.accept {
+    background-color: blue;
+    height: 30px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deny-button {
+    background-color: transparent;
+    height: 30px;
+    width: 30px;
+}

@@ -53,22 +53,19 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
 
       <div className="stopwatch-buttons">
         {!started ? (
-          <button className="stopwatch-button" onClick={startAndPause}>
-            <FaPlay />
-          </button>
-        ) : isRunning ? (
-          <button className="stopwatch-button" onClick={startAndPause}>
-            <FaPause />
-          </button>
-        ) : (
-          <>
-            <button className="stopwatch-button" onClick={startAndPause}>
-              <FaPlay />
-            </button>
-            <button className="stopwatch-button" onClick={handleStop}>
-              <FaStop />
-            </button>
-          </>
+        <button  className= "stopwatch-button play" onClick={startAndPause}>
+          <FaPlay />
+        </button> 
+          ) : (
+            <>
+        <button  className={`stopwatch-button ${!isRunning ? "slide-left play" : "pause"}`} onClick={startAndPause}>
+          {!isRunning ? <FaPlay /> : <FaPause />}
+        </button>
+          
+        <button className={`stopwatch-button stop ${!isRunning ? "slide-right" : ""}`} onClick={handleStop}>
+          <FaStop />
+        </button>
+        </>
         )}
       </div>
 
