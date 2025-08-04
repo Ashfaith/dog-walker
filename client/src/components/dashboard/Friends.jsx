@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { IoIosClose } from "react-icons/io";
+import { IoIosClose, IoIosSearch } from "react-icons/io";
 import "./friends.css";
 
 function Friends() {
@@ -90,21 +90,26 @@ function Friends() {
 
       if (res.ok) {
         console.log(data);
-    } else {
-      console.error("Server error:", res.status, data?.message || data);
+      } else {
+        console.error("Server error:", res.status, data?.message || data);
+      }
+    } catch (err) {
+      console.error("Network or parsing error:", err);
+      console.log(err.message);
     }
-  } catch (err) {
-    console.error("Network or parsing error:", err);
-    console.log(err.message);
-  }
-};
+  };
 
   return (
     <div className="friends-content">
       <Link to="/dashboard/people-search">
-      <input className="search-bar" placeholder="Search people"/>
+        <div className="search-container">
+          <span className="search-icon">
+            <IoIosSearch />
+          </span>
+          <input className="search-bar" placeholder="Search people" />
+        </div>
       </Link>
-    {console.log(requests)}
+
       {!requests || requests.length <= 0 ? null : (
         <div className="requests-container">
           <h3>Requests</h3>
@@ -113,10 +118,16 @@ function Friends() {
               <li className="request-alert" key={index}>
                 <h4>{request.requesterName}</h4>
                 <div className="button-container">
-                <button className="accept" onClick={() => handleRequest(true, request.requestId)}>
-                  Accept
-                </button>
-                <IoIosClose className="deny-button" onClick={() => handleRequest(false, request.requestId)} />
+                  <button
+                    className="accept"
+                    onClick={() => handleRequest(true, request.requestId)}
+                  >
+                    Accept
+                  </button>
+                  <IoIosClose
+                    className="deny-button"
+                    onClick={() => handleRequest(false, request.requestId)}
+                  />
                 </div>
               </li>
             ))}
@@ -124,27 +135,29 @@ function Friends() {
         </div>
       )}
 
-      <h3>Followers</h3>
-      <ul>
-        {!followers
-          ? null
-          : followers.map((follower, index) => (
-              <li key={index}>
-                <h4>{follower.name}</h4>
-                {follower.following === false ? (
-                  <p>pending</p>
-                ) : !follower.following ? (
-                  <button
-                    onClick={() => sendFollowRequest(follower.followerId)}
-                  >
-                    Follow Back
-                  </button>
-                ) : (
-                  <p>Watching your walks!</p>
-                )}
-              </li>
-            ))}
-      </ul>
+      <section className="followers-section">
+        <h3>Followers</h3>
+        <ul>
+          {!followers
+            ? null
+            : followers.map((follower, index) => (
+                <li key={index}>
+                  <h4>{follower.name}</h4>
+                  {follower.following === false ? (
+                    <p>pending</p>
+                  ) : !follower.following ? (
+                    <button
+                      onClick={() => sendFollowRequest(follower.followerId)}
+                    >
+                      Follow Back
+                    </button>
+                  ) : (
+                    <p>Watching your walks!</p>
+                  )}
+                </li>
+              ))}
+        </ul>
+      </section>
     </div>
   );
 }

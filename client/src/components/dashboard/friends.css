@@ -1,35 +1,76 @@
 .friends-content {
-    margin: 20px;
+  width: 100vw;
+  height: 50px;
+  margin: 0;
+  background-color: black;
 }
 
 .requests-container > h3 {
-    margin: 8px 0 8px 0;
+  margin: 8px 0 8px 0;
 }
 
 .request-alert {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    margin: 5px 0 5px 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin: 5px 0 5px 0;
 }
 
 .button-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .accept {
-    background-color: blue;
-    height: 30px;
-    width: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: blue;
+  height: 30px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .deny-button {
-    background-color: transparent;
-    height: 30px;
-    width: 30px;
+  background-color: transparent;
+  height: 30px;
+  width: 30px;
+}
+
+.search-container {
+  margin-left: 10px;
+  position: relative;
+}
+
+.search-icon > * {
+  position: absolute;
+  left: 8px;
+  transform: translateY(-12%);
+  color: #b1b1b1;
+}
+
+.search-bar {
+  padding: 8px 8px 8px 35px;
+  margin-top: 12px;
+  border-radius: 8px;
+  width: 84%;
+  height: 12px;
+  background-color: var(--bg-color);
+  color: #b1b1b1;
+  outline: none;
+  border: none;
+}
+
+.followers-section {
+  margin-top: 4px;
+  background-color: var(--bg-color);
+}
+
+.followers-section > h3 {
+  margin: 18px;
+  padding-top: 8px;
+}
+
+.followers-section > ul {
+  padding-bottom: 8px;
 }

@@ -1,0 +1,37 @@
+.search-content {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+.search-people-bar {
+  padding: 8px 8px 8px 8px;
+  border-radius: 8px;
+  width: 91%;
+  height: 12px;
+  background-color: var(--bg-color);
+  color: #b1b1b1;
+  outline: none;
+  border: none;
+}
+
+.search-button {
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  background-color: #818181;
+  height: 12px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0a0a0a;
+}
+
+.result-container {
+  position: relative;
+  top: 50px;
+}

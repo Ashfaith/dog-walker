@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { IoIosSearch } from "react-icons/io";
+import "./peopleSearch.css";
 
 function PeopleSearch() {
   const [searchValue, setSearchValue] = useState("");
@@ -64,42 +66,46 @@ function PeopleSearch() {
   };
 
   return (
-    <>
-      {console.log(foundUsers)}
+    <section className="search-content">
       <div className="search-container">
         <form onSubmit={(e) => searchUsers(e)}>
           <input
+            className="search-people-bar"
             type="text"
-            placeholder="Search.."
+            placeholder="Search people"
             onChange={(e) => setSearchValue(e.target.value)}
             value={searchValue}
           />
-          <button type="submit">Search</button>
+          <button className="search-button" type="submit">
+            <IoIosSearch className="search-icon" />
+          </button>
         </form>
       </div>
-      <ul>
-        {!foundUsers
-          ? null
-          : foundUsers.map((follower, index) => (
-              <li key={index}>
-                <h4>{follower.name}</h4>
-                {follower.follows === true && follower.followedBy === true ? (
-                  <p>Watching your walks!</p>
-                ) : follower.follwedBy === true ? (
-                  <button onClick={() => sendFollowRequest(follower.id)}>
-                    Follow Back
-                  </button>
-                ) : follower.follows === false ? (
-                  <p>pending</p>
-                ) : (
-                  <button onClick={() => sendFollowRequest(follower.id)}>
-                    Follow
-                  </button>
-                )}
-              </li>
-            ))}
-      </ul>
-    </>
+      <div className="result-container">
+        <ul>
+          {!foundUsers
+            ? null
+            : foundUsers.map((follower, index) => (
+                <li key={index}>
+                  <h4>{follower.name}</h4>
+                  {follower.follows === true && follower.followedBy === true ? (
+                    <p>Watching your walks!</p>
+                  ) : follower.follwedBy === true ? (
+                    <button onClick={() => sendFollowRequest(follower.id)}>
+                      Follow Back
+                    </button>
+                  ) : follower.follows === false ? (
+                    <p>pending</p>
+                  ) : (
+                    <button onClick={() => sendFollowRequest(follower.id)}>
+                      Follow
+                    </button>
+                  )}
+                </li>
+              ))}
+        </ul>
+      </div>
+    </section>
   );
 }
 
