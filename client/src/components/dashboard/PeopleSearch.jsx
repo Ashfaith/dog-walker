@@ -77,7 +77,7 @@ function PeopleSearch() {
             value={searchValue}
           />
           <button className="search-button" type="submit">
-            <IoIosSearch className="search-icon" />
+            <IoIosSearch className="search-icon-overlay" />
           </button>
         </form>
       </div>

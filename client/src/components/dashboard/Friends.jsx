@@ -137,26 +137,28 @@ function Friends() {
 
       <section className="followers-section">
         <h3>Followers</h3>
-        <ul>
-          {!followers
-            ? null
-            : followers.map((follower, index) => (
-                <li key={index}>
-                  <h4>{follower.name}</h4>
-                  {follower.following === false ? (
-                    <p>pending</p>
-                  ) : !follower.following ? (
-                    <button
-                      onClick={() => sendFollowRequest(follower.followerId)}
-                    >
-                      Follow Back
-                    </button>
-                  ) : (
-                    <p>Watching your walks!</p>
-                  )}
-                </li>
-              ))}
-        </ul>
+        <div className="grid-container">
+          <ul className="follower-list">
+            {!followers
+              ? null
+              : followers.map((follower, index) => (
+                  <li className="follower-container" key={index}>
+                    <h4>{follower.name}</h4>
+                    {follower.following === false ? (
+                      <p>pending</p>
+                    ) : !follower.following ? (
+                      <button
+                        onClick={() => sendFollowRequest(follower.followerId)}
+                      >
+                        Follow
+                      </button>
+                    ) : (
+                      <p>Watching your walks!</p>
+                    )}
+                  </li>
+                ))}
+          </ul>
+        </div>
       </section>
     </div>
   );

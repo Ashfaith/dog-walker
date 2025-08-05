@@ -6,8 +6,9 @@
 
 .search-people-bar {
   padding: 8px 8px 8px 8px;
+  margin-top: 12px;
   border-radius: 8px;
-  width: 91%;
+  width: 92%;
   height: 12px;
   background-color: var(--bg-color);
   color: #b1b1b1;
@@ -19,15 +20,16 @@
   position: absolute;
   top: 50%;
   right: 22px;
-  transform: translateY(-50%);
+  transform: translateY(-22%);
   background-color: #818181;
   height: 12px;
 }
 
-.search-icon {
+.search-icon-overlay {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  right: 10px;
   color: #0a0a0a;
 }
 

@@ -70,7 +70,7 @@ function Home() {
                 <div className="stats-cont">
                   <div className="stats-box">
                     <p>Distance</p>
-                    <h5 className="post-distance">{post.distance}</h5>
+                    <h5 className="post-distance">{post.distance}km</h5>
                   </div>
                   <div className="stats-box">
                     <p>Time</p>

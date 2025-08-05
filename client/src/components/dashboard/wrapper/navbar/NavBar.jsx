@@ -20,11 +20,11 @@ function NavBar() {
             Friends
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="#" to="activity">
             Your Activity
           </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
