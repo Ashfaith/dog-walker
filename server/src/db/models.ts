@@ -90,7 +90,10 @@ async function getUsersByName(userName: string, userId: string) {
           eq(usersTable.firstName, userName),
           ilike(usersTable.firstName, `${userName}%`),
           ilike(usersTable.firstName, `%${userName}`),
-          ilike(usersTable.firstName, `%${userName}%`)
+          ilike(usersTable.firstName, `%${userName}%`),
+          ilike(usersTable.lastName, `${userName}%`),
+          ilike(usersTable.lastName, `%${userName}`),
+          ilike(usersTable.lastName, `%${userName}%`)
         ),
         not(eq(usersTable.id, userId))
       )
