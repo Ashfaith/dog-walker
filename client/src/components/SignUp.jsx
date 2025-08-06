@@ -6,8 +6,8 @@ function SignUp() {
   const navigate = useNavigate();
   const { setAuth } = useContext(AuthContext);
   const [form, setForm] = useState({
-    name: "",
-    // lastName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     pw: "",
   });
@@ -57,37 +57,33 @@ function SignUp() {
     <>
       <h2>SIGN UP</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label>First Name</label>
         <input
           type="text"
           name="first-name"
-          placeholder="Enter name"
-          value={form.name}
+          placeholder="First name"
+          value={form.firstName}
           onChange={(e) =>
-            setForm((prev) => ({ ...prev, name: e.target.value }))
+            setForm((prev) => ({ ...prev, firstName: e.target.value }))
           }
         />
-        {/* <label>Last Name</label>
         <input
           type="text"
           name="last-name"
-          placeholder="Enter last name"
+          placeholder="Last name"
           value={form.lastName}
           onChange={(e) =>
             setForm((prev) => ({ ...prev, lastName: e.target.value }))
           }
-        /> */}
-        <label>Email</label>
+        />
         <input
           type="email"
           name="email"
-          placeholder="Enter email"
+          placeholder="Email"
           value={form.email}
           onChange={(e) => {
             setForm((prev) => ({ ...prev, email: e.target.value }));
           }}
         />
-        <label>Password</label>
         <input
           type="password"
           name="password"
@@ -97,7 +93,6 @@ function SignUp() {
             setForm((prev) => ({ ...prev, pw: e.target.value }));
           }}
         />
-        <label>Confirm password</label>
         <input
           type="password"
           name="confirm"

@@ -13,9 +13,14 @@ async function listAllUsers(req, res) {
 
 async function createUser(req, res) {
   try {
-    const { name, email, pw } = req.body;
+    const { firstName, lastName, email, pw } = req.body;
     const hashedPassword = await bcrypt.hash(pw, 10);
-    const user = await models.insertUser(name, email, hashedPassword);
+    const user = await models.insertUser(
+      firstName,
+      lastName,
+      email,
+      hashedPassword
+    );
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });

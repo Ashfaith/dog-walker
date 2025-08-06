@@ -35,10 +35,12 @@ async function submitPost(req, res) {
 }
 
 async function getPosts(req, res) {
+  const user = req.user;
   try {
-    const posts = await models.queryPosts();
+    const posts = await models.queryPosts(user.id);
     res.json(posts);
   } catch (err) {
+    console.error("Error in getPosts:", err);
     res.status(500).json({ message: err.message });
   }
 }

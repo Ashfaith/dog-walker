@@ -8,7 +8,7 @@
   padding: 8px 8px 8px 8px;
   margin-top: 12px;
   border-radius: 8px;
-  width: 92%;
+  width: 358px;
   height: 12px;
   background-color: var(--bg-color);
   color: #b1b1b1;
@@ -19,7 +19,7 @@
 .search-button {
   position: absolute;
   top: 50%;
-  right: 22px;
+  right: 15px;
   transform: translateY(-22%);
   background-color: #818181;
   height: 12px;
@@ -34,6 +34,28 @@
 }
 
 .result-container {
-  position: relative;
-  top: 50px;
+  margin-top: 25px;
+}
+
+.result-container > h5 {
+  margin: 0 0 10px 10px;
+}
+
+.found-user {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 10px 5px 10px;
+}
+
+.found-user > button {
+  height: 30px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid var(--text-color);
 }

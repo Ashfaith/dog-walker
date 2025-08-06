@@ -12,25 +12,36 @@ async function getAllUsernames() {
   return await db
     .select({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
     })
     .from(usersTable);
 }
 
-async function insertUser(name: string, email: string, pw: string) {
-  return await db.insert(usersTable).values({ name, email, pw }).returning({
-    id: usersTable.id,
-    name: usersTable.name,
-    email: usersTable.email,
-  });
+async function insertUser(
+  firstName: string,
+  lastName: string,
+  email: string,
+  pw: string
+) {
+  return await db
+    .insert(usersTable)
+    .values({ firstName, lastName, email, pw })
+    .returning({
+      id: usersTable.id,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
+      email: usersTable.email,
+    });
 }
 
 async function getUserById(userId: string) {
   return await db
     .select({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
     })
     .from(usersTable)
@@ -42,11 +53,12 @@ async function getUserByName(userName: string) {
   return await db
     .select({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
     })
     .from(usersTable)
-    .where(eq(usersTable.name, userName))
+    .where(eq(usersTable.firstName, userName))
     .then((res) => res[0]);
 }
 
@@ -57,7 +69,8 @@ async function getUsersByName(userName: string, userId: string) {
   return await db
     .select({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
       follows: follows.approve,
       followedBy: followedBy.approve,
@@ -74,10 +87,10 @@ async function getUsersByName(userName: string, userId: string) {
     .where(
       and(
         or(
-          eq(usersTable.name, userName),
-          ilike(usersTable.name, `${userName}%`),
-          ilike(usersTable.name, `%${userName}`),
-          ilike(usersTable.name, `%${userName}%`)
+          eq(usersTable.firstName, userName),
+          ilike(usersTable.firstName, `${userName}%`),
+          ilike(usersTable.firstName, `%${userName}`),
+          ilike(usersTable.firstName, `%${userName}%`)
         ),
         not(eq(usersTable.id, userId))
       )
@@ -99,7 +112,8 @@ async function getUsersByEmail(email: string, userId: string) {
   return await db
     .select({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
       follows: follows.approve,
       followedBy: followedBy.approve,
@@ -124,19 +138,25 @@ async function getUsersByEmail(email: string, userId: string) {
 async function deleteUserById(id: string) {
   return await db.delete(usersTable).where(eq(usersTable.id, id)).returning({
     id: usersTable.id,
-    name: usersTable.name,
+    firstName: usersTable.firstName,
+    lastName: usersTable.lastName,
     email: usersTable.email,
   });
 }
 
-async function updateUser(newName: string, userId: string) {
+async function updateUser(
+  newFirstName: string,
+  newLastName: string,
+  userId: string
+) {
   return await db
     .update(usersTable)
-    .set({ name: newName })
+    .set({ firstName: newFirstName, lastName: newLastName })
     .where(eq(usersTable.id, userId))
     .returning({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
     });
 }
@@ -148,7 +168,8 @@ async function updatePassword(newPassword: string, userId: string) {
     .where(eq(usersTable.id, userId))
     .returning({
       id: usersTable.id,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       email: usersTable.email,
     });
 }
@@ -166,7 +187,7 @@ async function createPost(
     .returning();
 }
 
-async function queryPosts() {
+async function queryPosts(currentUser: string) {
   return await db
     .select({
       id: posts.id,
@@ -176,10 +197,21 @@ async function queryPosts() {
       distance: posts.distance,
       time: posts.time,
       userId: posts.user_id,
-      userName: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
     })
     .from(posts)
     .innerJoin(usersTable, eq(posts.user_id, usersTable.id))
+    .innerJoin(
+      userFollow,
+      and(eq(userFollow.uid1, usersTable.id), eq(userFollow.approve, true))
+    )
+    .where(
+      or(
+        eq(posts.user_id, currentUser),
+        and(eq(userFollow.approve, true), eq(userFollow.uid1, currentUser))
+      )
+    )
     .limit(10);
 }
 
@@ -195,7 +227,7 @@ async function retrieveFollowRequest(userId: string) {
     .select({
       requestId: userFollow.id,
       followerId: userFollow.uid1,
-      requesterName: usersTable.name,
+      requesterName: usersTable.firstName,
     })
     .from(userFollow)
     .innerJoin(usersTable, eq(userFollow.uid1, usersTable.id))
@@ -210,9 +242,7 @@ async function approveFollow(reqId: number) {
 }
 
 async function rejectFollow(reqId: number) {
-  return await db
-    .delete(userFollow)
-    .where(eq(userFollow.id, reqId));
+  return await db.delete(userFollow).where(eq(userFollow.id, reqId));
 }
 
 async function retrieveAllFollowers(userId: string) {
@@ -221,7 +251,8 @@ async function retrieveAllFollowers(userId: string) {
   return await db
     .select({
       followerId: userFollow.uid1,
-      name: usersTable.name,
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
       following: followBack.approve,
     })
     .from(userFollow)

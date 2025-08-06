@@ -50,14 +50,13 @@ function Home() {
         )}
       </div>
       <main>
-        {console.log(posts)}
         <ul>
           {posts.map((post) => (
             <li key={post.id} className="post-cont">
               <section className="content-container">
                 <div className="post-left-side">
                   <div className="post-user-info">
-                    <h4>{post.userName}</h4>
+                    <h4>{`${post.firstName} ${post.lastName}`}</h4>
                     <p className="post-date">{dateConvert(post.created)}</p>
                   </div>
 

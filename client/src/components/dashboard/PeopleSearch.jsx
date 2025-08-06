@@ -8,6 +8,7 @@ function PeopleSearch() {
 
   const searchUsers = async (e) => {
     e.preventDefault();
+    console.log(searchValue);
     let request;
     let queryParam = "name";
 
@@ -82,12 +83,14 @@ function PeopleSearch() {
         </form>
       </div>
       <div className="result-container">
+        <h5>Search results</h5>
         <ul>
+          {console.log("users:", foundUsers)}
           {!foundUsers
             ? null
             : foundUsers.map((follower, index) => (
-                <li key={index}>
-                  <h4>{follower.name}</h4>
+                <li className="found-user" key={index}>
+                  <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
                   {follower.follows === true && follower.followedBy === true ? (
                     <p>Watching your walks!</p>
                   ) : follower.follwedBy === true ? (

@@ -12,10 +12,25 @@ export const PostsContext = createContext();
 function Dashboard() {
   const [posts, setPosts] = useState([]);
 
+  const getPosts = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/dashboard/display-posts", {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setPosts(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    fetch("http://localhost:3000/dashboard/display-posts")
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
+    getPosts();
   }, []);
 
   if (posts) {
@@ -30,11 +45,12 @@ function Dashboard() {
 
   return (
     <div className="layout">
+      {console.log(posts)}
       <Header className="header" />
       <PostsContext.Provider value={posts}>
         <main className="main">
           <div className="main-content">
-          <Outlet />
+            <Outlet />
           </div>
         </main>
       </PostsContext.Provider>
