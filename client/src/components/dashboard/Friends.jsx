@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { IoIosClose, IoIosSearch } from "react-icons/io";
+import FollowButton from "../utils/FollowButton";
 import "./friends.css";
 
 function Friends() {
@@ -46,32 +47,6 @@ function Friends() {
   useEffect(() => {
     getFollowers();
   }, []);
-
-  //send requests
-  const sendFollowRequest = async (id) => {
-    try {
-      const res = await fetch("http://localhost:3000/followers/request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ id }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        console.log(`Follower request sent to ${id}`);
-      } else {
-        console.error(
-          "Server returned an error:",
-          res.status,
-          data.message || data
-        );
-      }
-    } catch (err) {
-      console.error("Network or parsing error:", err);
-    }
-  };
 
   //handle follow requests
   const handleRequest = async (action, requestId) => {
@@ -143,15 +118,11 @@ function Friends() {
               ? null
               : followers.map((follower, index) => (
                   <li className="follower-container" key={index}>
-                    <h4>{follower.name}</h4>
+                    <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
                     {follower.following === false ? (
                       <p>pending</p>
                     ) : !follower.following ? (
-                      <button
-                        onClick={() => sendFollowRequest(follower.followerId)}
-                      >
-                        Follow
-                      </button>
+                      <FollowButton follower={follower} />
                     ) : (
                       <p>Watching your walks!</p>
                     )}

@@ -94,9 +94,9 @@ function PeopleSearch() {
                   {follower.follows === true && follower.followedBy === true ? (
                     <p>Watching your walks!</p>
                   ) : follower.follwedBy === true ? (
-                    <button onClick={() => sendFollowRequest(follower.id)}>
-                      Follow Back
-                    </button>
+                    <FollowButton
+                      onClick={() => sendFollowRequest(follower.id)}
+                    />
                   ) : follower.follows === false ? (
                     <p>pending</p>
                   ) : (
