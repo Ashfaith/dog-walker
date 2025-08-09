@@ -1,1 +1,0 @@
-ALTER TABLE "user_follow" ALTER COLUMN "status" SET DATA TYPE boolean;

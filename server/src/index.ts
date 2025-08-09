@@ -14,6 +14,15 @@ require("./config/passport");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.status(401).json({ error: "Authentication required" });
+    res.redirect("/login");
+  }
+}
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -35,9 +44,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
-app.use("/dashboard", dashboardRoutes);
-app.use("/followers", followerRoutes);
+app.use("/users", ensureAuthenticated, userRoutes);
+app.use("/dashboard", ensureAuthenticated, dashboardRoutes);
+app.use("/followers", ensureAuthenticated, followerRoutes);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);

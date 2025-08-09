@@ -1,6 +1,6 @@
 {
-  "id": "5cefbccc-ed9d-4dd7-b219-7ad76235afa2",
-  "prevId": "6f1bbce6-0db4-4592-a58f-8c1a1d9234d8",
+  "id": "6f1bbce6-0db4-4592-a58f-8c1a1d9234d8",
+  "prevId": "c59c5cf2-1c5d-4ce4-8f98-84e62be34121",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -183,8 +183,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "admin": {
-          "name": "admin",
+        "is_admin": {
+          "name": "is_admin",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,

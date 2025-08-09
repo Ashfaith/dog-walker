@@ -1,1 +1,0 @@
-ALTER TABLE "user_follow" DROP CONSTRAINT "chk_friend";

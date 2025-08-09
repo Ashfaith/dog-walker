@@ -1,6 +1,5 @@
 const axios = require("axios");
 const models = require("../db/models");
-const { response } = require("express");
 
 async function fetchWeather(req, res) {
   let location = req.query.location;

@@ -12,7 +12,7 @@ router.get("/users-by-email", controller.usersByEmail);
 router.post("/createUser", controller.createUser);
 
 //Change password
-router.patch("/passwordUpdate/:id", getUser, controller.updatePassword);
+router.patch("/admin/passwordUpdate/:id", getUser, controller.updatePassword);
 
 router.get("/", controller.listAllUsers);
 

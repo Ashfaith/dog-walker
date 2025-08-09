@@ -1,1 +1,0 @@
-ALTER TABLE "user_follow" RENAME COLUMN "status" TO "approve_on";

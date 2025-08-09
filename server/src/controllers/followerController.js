@@ -26,9 +26,6 @@ async function viewFollowRequests(req, res) {
 }
 
 async function actionRequest(req, res) {
-  if (!req.user) {
-    return console.log("not signed in");
-  }
   const { action, requestId } = req.body;
   if (action) {
     try {

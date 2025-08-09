@@ -70,8 +70,6 @@ async function updatePassword(req, res) {
 }
 
 async function usersByName(req, res) {
-  if (!req.user) return;
-
   const { name } = req.query;
   const id = req.user.id;
   try {
@@ -83,8 +81,6 @@ async function usersByName(req, res) {
 }
 
 async function usersByEmail(req, res) {
-  if (!req.user) return;
-
   const { email } = req.query;
   const id = req.user.id;
   try {
