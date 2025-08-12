@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
+import FollowButton from "../utils/FollowButton";
 import "./peopleSearch.css";
 
 function PeopleSearch() {
@@ -42,6 +43,7 @@ function PeopleSearch() {
   };
 
   const sendFollowRequest = async (id) => {
+    console.log(id);
     try {
       const res = await fetch("http://localhost:3000/followers/request", {
         method: "POST",
@@ -91,18 +93,17 @@ function PeopleSearch() {
             : foundUsers.map((follower, index) => (
                 <li className="found-user" key={index}>
                   <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
-                  {follower.follows === true && follower.followedBy === true ? (
-                    <p>Watching your walks!</p>
-                  ) : follower.follwedBy === true ? (
+                  {follower.following === false ? (
+                    <p>pending</p>
+                  ) : !follower.following ? (
                     <FollowButton
+                      follower={follower}
+                      textTrue={"Requested"}
+                      textFalse={"Follow"}
                       onClick={() => sendFollowRequest(follower.id)}
                     />
-                  ) : follower.follows === false ? (
-                    <p>pending</p>
                   ) : (
-                    <button onClick={() => sendFollowRequest(follower.id)}>
-                      Follow
-                    </button>
+                    <p>Watching your walks!</p>
                   )}
                 </li>
               ))}

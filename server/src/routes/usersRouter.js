@@ -11,9 +11,6 @@ router.get("/users-by-email", controller.usersByEmail);
 //Create user
 router.post("/createUser", controller.createUser);
 
-//Change password
-router.patch("/admin/passwordUpdate/:id", getUser, controller.updatePassword);
-
 router.get("/", controller.listAllUsers);
 
 //Load user
@@ -23,7 +20,7 @@ router.get("/:id", getUser, (req, res) => {
 });
 
 //Update user
-router.patch("/:id", getUser, controller.editUser);
+router.patch("/:id", getUser, controller.editUserName);
 
 //Delete user
 router.delete("/:id", getUser, controller.deleteUser);

@@ -5,7 +5,7 @@ import SignUp from "./components/SignUp";
 import Dashboard from "./components/Dashboard";
 import Home from "./components/dashboard/Home";
 import Record from "./components/dashboard/Record";
-import Friends from "./components/dashboard/Friends";
+import Followers from "./components/dashboard/Followers";
 import Activity from "./components/dashboard/Activity";
 import { AuthContext } from "./components/utils/AuthContext";
 import { WeatherProvider } from "./components/utils/WeatherContext";
@@ -25,7 +25,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />}>
               <Route index element={<Home />} />
               <Route path="record" element={<Record />} />
-              <Route path="friends" element={<Friends />} />
+              <Route path="followers" element={<Followers />} />
               <Route path="activity" element={<Activity />} />
               <Route path="people-search" element={<PeopleSearch />} />
             </Route>

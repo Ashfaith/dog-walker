@@ -16,8 +16,8 @@ function NavBar() {
           </Link>
         </li>
         <li>
-          <Link href="#" to="friends">
-            Friends
+          <Link href="#" to="followers">
+            Followers
           </Link>
         </li>
         {/* <li>

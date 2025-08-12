@@ -42,13 +42,13 @@ async function deleteUser(req, res) {
   }
 }
 
-async function editUser(req, res) {
+async function editUserName(req, res) {
   const user = req.user;
   if (req.body.name !== null) {
     req.user.name = req.body.name;
   }
   try {
-    const updatedUser = await models.updateUser(req.user.name, user.id);
+    const updatedUser = await models.updateUserName(req.user.name, user.id);
     res.json(updatedUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -95,7 +95,7 @@ module.exports = {
   listAllUsers,
   deleteUser,
   createUser,
-  editUser,
+  editUserName,
   updatePassword,
   usersByEmail,
   usersByName,

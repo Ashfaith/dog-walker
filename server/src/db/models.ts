@@ -43,6 +43,7 @@ async function getUserById(userId: string) {
       firstName: usersTable.firstName,
       lastName: usersTable.lastName,
       email: usersTable.email,
+      admin: usersTable.admin,
     })
     .from(usersTable)
     .where(eq(usersTable.id, userId))
@@ -147,7 +148,7 @@ async function deleteUserById(id: string) {
   });
 }
 
-async function updateUser(
+async function updateUserName(
   newFirstName: string,
   newLastName: string,
   userId: string
@@ -164,7 +165,7 @@ async function updateUser(
     });
 }
 
-async function updatePassword(newPassword: string, userId: string) {
+async function updatePassword(userId: string, newPassword: string) {
   return await db
     .update(usersTable)
     .set({ pw: newPassword })
@@ -276,7 +277,7 @@ module.exports = {
   getUsersByEmail,
   insertUser,
   getUserById,
-  updateUser,
+  updateUserName,
   updatePassword,
   createPost,
   queryPosts,

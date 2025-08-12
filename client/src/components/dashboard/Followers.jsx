@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { IoIosClose, IoIosSearch } from "react-icons/io";
 import FollowButton from "../utils/FollowButton";
-import "./friends.css";
+import "./followers.css";
 
-function Friends() {
+function Followers() {
   // get follower requests
   const [requests, setRequests] = useState(null);
 
@@ -47,6 +47,20 @@ function Friends() {
   useEffect(() => {
     getFollowers();
   }, []);
+
+  //send requests
+  const sendFollowRequest = async (id) => {
+    try {
+      await fetch("http://localhost:3000/followers/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ id }),
+      });
+    } catch (err) {
+      console.error("Network error:", err);
+    }
+  };
 
   //handle follow requests
   const handleRequest = async (action, requestId) => {
@@ -93,12 +107,12 @@ function Friends() {
               <li className="request-alert" key={index}>
                 <h4>{request.requesterName}</h4>
                 <div className="button-container">
-                  <button
+                  <FollowButton
                     className="accept"
+                    textFalse={"Accept"}
+                    textTrue={"Accepted"}
                     onClick={() => handleRequest(true, request.requestId)}
-                  >
-                    Accept
-                  </button>
+                  />
                   <IoIosClose
                     className="deny-button"
                     onClick={() => handleRequest(false, request.requestId)}
@@ -122,9 +136,14 @@ function Friends() {
                     {follower.following === false ? (
                       <p>pending</p>
                     ) : !follower.following ? (
-                      <FollowButton follower={follower} />
+                      <FollowButton
+                        follower={follower}
+                        textTrue={"Requested"}
+                        textFalse={"Follow"}
+                        onClick={() => sendFollowRequest(follower.followerId)}
+                      />
                     ) : (
-                      <p>Watching your walks!</p>
+                      <p>Following</p>
                     )}
                   </li>
                 ))}
@@ -135,4 +154,4 @@ function Friends() {
   );
 }
 
-export default Friends;
+export default Followers;

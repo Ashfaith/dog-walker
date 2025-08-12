@@ -32,7 +32,17 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username": "alf.fred@gmail.com",
+    "username": "ash.faith@gmail.com",
+    "password": "Freddy331"
+}
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "test.fred@gmail.com",
     "password": "freddy331"
 }
 
@@ -59,3 +69,13 @@ POST http://localhost:3000/followers/request
 ###
 
 GET  http://localhost:3000/followers/view-requests
+
+###
+
+PATCH http://localhost:3000/admin/passwordUpdate
+Content-Type: application/json
+
+{
+    "userId": "5e1a2a03-120e-4f27-9182-07b633f7aa52",
+    "newPassword": "freddy332"
+}
