@@ -7,6 +7,7 @@ import "./dashboard.css";
 const strReverse = (str) => {
   return str.split("").reverse().join("");
 };
+
 export const PostsContext = createContext();
 
 function Dashboard() {
@@ -25,7 +26,7 @@ function Dashboard() {
         setPosts(data);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -33,7 +34,7 @@ function Dashboard() {
     getPosts();
   }, []);
 
-  if (posts) {
+  if (posts > 0) {
     posts.sort((a, b) =>
       strReverse(a.createdAt).localeCompare(
         strReverse(b.createdAt),
@@ -45,7 +46,6 @@ function Dashboard() {
 
   return (
     <div className="layout">
-      {console.log(posts)}
       <Header className="header" />
       <PostsContext.Provider value={posts}>
         <main className="main">

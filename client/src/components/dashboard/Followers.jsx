@@ -74,17 +74,8 @@ function Followers() {
           body: JSON.stringify({ action, requestId }),
         }
       );
-
-      const data = await res.json();
-
-      if (res.ok) {
-        console.log(data);
-      } else {
-        console.error("Server error:", res.status, data?.message || data);
-      }
     } catch (err) {
-      console.error("Network or parsing error:", err);
-      console.log(err.message);
+      console.error({ message: err });
     }
   };
 

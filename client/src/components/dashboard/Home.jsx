@@ -50,7 +50,7 @@ function Home() {
         )}
       </div>
       <main>
-        <ul>
+        <ul className="posts-list">
           {posts.map((post) => (
             <li key={post.id} className="post-cont">
               <section className="content-container">

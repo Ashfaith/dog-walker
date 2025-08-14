@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 async function changeUserPassword(req, res) {
   try {
     const { userId, newPassword } = req.body;
-    console.log(userId, newPassword);
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     const user = await models.updatePassword(userId, hashedPassword);
     res.json(user);

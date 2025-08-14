@@ -1,11 +1,38 @@
 import "./header.css";
+import { useState, useEffect } from "react";
 
 function Header() {
-  return (
+  const [user, setUser] = useState();
+
+  const provideUser = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/dashboard/get-user", {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    provideUser();
+  }, []);
+
+  return !user ? (
+    <div>Loading...</div>
+  ) : (
     <header className="header">
       <h3>Walker</h3>
       <div>
-        <div>userImg</div> {/*change to image later */}
+        <div className="user-display">{user.firstName}</div>
+        {/*change to image later */}
       </div>
     </header>
   );

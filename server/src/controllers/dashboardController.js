@@ -59,9 +59,15 @@ async function fetchMap(req, res) {
   }
 }
 
+async function getUser(req, res) {
+  const user = req.user;
+  res.json(user);
+}
+
 module.exports = {
   fetchWeather,
   submitPost,
   getPosts,
   fetchMap,
+  getUser,
 };

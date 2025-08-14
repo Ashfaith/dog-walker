@@ -9,7 +9,6 @@ function PeopleSearch() {
 
   const searchUsers = async (e) => {
     e.preventDefault();
-    console.log(searchValue);
     let request;
     let queryParam = "name";
 
@@ -43,7 +42,6 @@ function PeopleSearch() {
   };
 
   const sendFollowRequest = async (id) => {
-    console.log(id);
     try {
       const res = await fetch("http://localhost:3000/followers/request", {
         method: "POST",
@@ -51,18 +49,6 @@ function PeopleSearch() {
         credentials: "include",
         body: JSON.stringify({ id }),
       });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        console.log(`Follower request sent to ${id}`);
-      } else {
-        console.error(
-          "Server returned an error:",
-          res.status,
-          data.message || data
-        );
-      }
     } catch (err) {
       console.error("Network or parsing error:", err);
     }
@@ -87,7 +73,6 @@ function PeopleSearch() {
       <div className="result-container">
         <h5>Search results</h5>
         <ul>
-          {console.log("users:", foundUsers)}
           {!foundUsers
             ? null
             : foundUsers.map((follower, index) => (
