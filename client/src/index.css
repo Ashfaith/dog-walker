@@ -1,18 +1,34 @@
-:root {
-  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --text-color: rgba(255, 255, 255, 0.87);
-  --bg-color: #1f1f1f;
-  --info-size: 12px;
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@1,14..32,100..900&display=swap");
 
-  font-family: var(--font-family);
-  color: var(--text-color);
-  background-color: var(--bg-color);
+:root {
+  font-family: "Figtree", sans-serif;
+
+  /* color-scheme: light dark; */
+
+  --light-text: rgb(0, 0, 0);
+  --light-bg: #d3d3d3;
+  --light-box: rgba(59, 246, 117, 0.18);
+  --light-accent: #3bf675;
+  --light-title: rgb(0, 0, 0);
+
+  --dark-text: rgb(255, 255, 255);
+  --dark-bg: #2d2d2d;
+  --dark-box: rgba(59, 246, 117, 0.27);
+  --dark-accent: #030a04;
+  --dark-title: #3bf675;
+
+  --info-size: 12px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* * {
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+  color: light-dark(var(--light-text), var(--dark-text));
+} */
 
 ul,
 ol,
@@ -43,11 +59,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 .layout {
   display: flex;
   flex-direction: column;
@@ -65,19 +76,18 @@ h1 {
 
 button {
   border-radius: 8px;
-  color: var(--text-color);
+  color: white;
+  /* color: light-dark(var(--light-text), var(--dark-text)); */
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #000000;
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

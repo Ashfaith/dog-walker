@@ -1,0 +1,85 @@
+#root {
+  background: #bcd0c3;
+  background: linear-gradient(
+    292deg,
+    rgba(188, 208, 195, 1) 0%,
+    rgba(107, 199, 135, 1) 82%,
+    rgba(74, 231, 123, 1) 100%
+  );
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.login-container {
+  display: flex;
+  width: 90%;
+  height: 500px;
+  flex-direction: column;
+  gap: 20%;
+  align-items: center;
+  margin-top: 25%;
+}
+
+.login-container .form-cont form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  font-style: italic;
+  font-weight: 600;
+  font-size: 55px;
+}
+
+.sign-in,
+.sign-up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sign-up {
+  margin-top: 60px;
+}
+
+form {
+  gap: 15px;
+}
+
+.input {
+  width: 260px;
+  height: 45px;
+  line-height: 30px;
+  padding: 0 5rem;
+  padding-left: 1rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #ffffff;
+  border-color: rgb(199, 199, 199);
+  color: #0d0c22;
+  transition: 0.5s ease;
+}
+
+.input::placeholder {
+  color: #999999;
+}
+
+.input:focus,
+input:hover {
+  outline: none;
+  border-color: rgb(199, 199, 199);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 5px rgba(146, 146, 146, 0.3);
+}
+
+button {
+  width: 358px;
+}
