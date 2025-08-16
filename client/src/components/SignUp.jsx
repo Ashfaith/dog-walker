@@ -41,6 +41,7 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(form);
     if (!validatePassword()) return;
     const res = await fetch("http://localhost:3000/users/createUser", {
       method: "POST",
@@ -48,15 +49,17 @@ function SignUp() {
       body: JSON.stringify(form),
     });
 
+    const data = await res.json();
+
     if (res.ok) {
       attemptLogin();
-    } else alert("unable to sign up");
+    } else alert(data.error[0].msg);
   };
 
   return (
     <>
       <h2>SIGN UP</h2>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onClick={(e) => handleSubmit(e)}>
         <input
           type="text"
           name="first-name"
@@ -99,9 +102,7 @@ function SignUp() {
           placeholder="Cofirm password"
           onChange={(e) => setConfirm(e.target.value)}
         />
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          Sign Up
-        </button>
+        <button type="submit">Sign Up</button>
       </form>
     </>
   );

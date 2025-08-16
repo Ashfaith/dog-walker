@@ -1,17 +1,13 @@
 const models = require("../db/models");
 const bcrypt = require("bcryptjs");
-
-async function listAllUsers(req, res) {
-  try {
-    const users = await models.getAllUsernames();
-    res.json(users);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
-}
+const { validationResult } = require("express-validator");
 
 async function createUser(req, res) {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(400).json({ error: error.array() });
+  }
+
   try {
     const { firstName, lastName, email, pw } = req.body;
     const hashedPassword = await bcrypt.hash(pw, 10);
@@ -92,7 +88,6 @@ async function usersByEmail(req, res) {
 }
 
 module.exports = {
-  listAllUsers,
   deleteUser,
   createUser,
   editUserName,

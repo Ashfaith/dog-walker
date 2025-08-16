@@ -38,7 +38,7 @@ app.use(passport.session());
 
 app.use("/auth", authRoutes);
 app.use("/admin", ensureAuthenticated, adminAuth, adminRoutes);
-app.use("/users", ensureAuthenticated, userRoutes);
+app.use("/users", userRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/followers", ensureAuthenticated, followerRoutes);
 

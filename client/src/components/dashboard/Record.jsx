@@ -121,24 +121,14 @@ function Record() {
               <input
                 type="text"
                 name="title"
-                placeholder="Title"
+                placeholder="Name your walk"
                 value={post.title}
                 onChange={(e) =>
                   setPost((prev) => ({ ...prev, title: e.target.value }))
                 }
+                required
               />
-              <input
-                type="text"
-                name="body"
-                placeholder="content"
-                value={post.body}
-                onChange={(e) =>
-                  setPost((prev) => ({ ...prev, content: e.target.value }))
-                }
-              />
-              <button type="submit" onClick={(e) => handleSubmit(e)}>
-                POST
-              </button>
+              <button type="submit">POST</button>
             </form>
           </>
         </ActivityDrawer>

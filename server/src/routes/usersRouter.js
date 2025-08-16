@@ -2,28 +2,27 @@ const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/userController");
 const models = require("../db/models");
+const { validateCreate, ensureAuthenticated } = require("../middleWare");
 
 //user searches
-router.get("/users-by-name", controller.usersByName);
+router.get("/users-by-name", ensureAuthenticated, controller.usersByName);
 
-router.get("/users-by-email", controller.usersByEmail);
+router.get("/users-by-email", ensureAuthenticated, controller.usersByEmail);
 
 //Create user
-router.post("/createUser", controller.createUser);
-
-router.get("/", controller.listAllUsers);
+router.post("/createUser", validateCreate, controller.createUser);
 
 //Load user
-router.get("/:id", getUser, (req, res) => {
+router.get("/:id", ensureAuthenticated, getUser, (req, res) => {
   const user = req.user;
   res.json(user);
 });
 
 //Update user
-router.patch("/:id", getUser, controller.editUserName);
+router.patch("/:id", ensureAuthenticated, getUser, controller.editUserName);
 
 //Delete user
-router.delete("/:id", getUser, controller.deleteUser);
+router.delete("/:id", ensureAuthenticated, getUser, controller.deleteUser);
 
 async function getUser(req, res, next) {
   let user;

@@ -18,7 +18,7 @@ async function fetchWeather(req, res) {
 
 async function submitPost(req, res) {
   try {
-    let { title, content, distance, time } = req.body;
+    let { title, distance, time } = req.body;
     const user = req.user;
     const post = await models.createPost(
       title,
