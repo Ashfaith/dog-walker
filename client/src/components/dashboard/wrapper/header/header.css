@@ -8,4 +8,12 @@
   height: 69px;
   z-index: 9999;
   position: fixed;
+  background-color: light-dark(var(--light-accent), var(--dark-accent));
+  border-radius: 0 0 10px 10px;
+}
+
+.header h3 {
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 600;
 }

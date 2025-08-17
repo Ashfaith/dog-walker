@@ -7,14 +7,6 @@
   margin: 0;
 }
 
-.post-cont {
-  background-color: #2a2a2a;
-  width: 100%;
-  margin-bottom: 5px;
-  border-top: 1px solid #252525;
-  border-bottom: 1px solid #252525;
-}
-
 .header {
   z-index: 1;
   position: fixed;
@@ -23,4 +15,8 @@
 .navbar {
   z-index: 9999;
   position: fixed;
+}
+
+.layout {
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
 }

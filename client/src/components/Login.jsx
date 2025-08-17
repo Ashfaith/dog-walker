@@ -25,38 +25,43 @@ function Login() {
   };
 
   return (
-    <main className="login-container">
-      <h1 className="title">Walker</h1>
-      <div className="form-cont">
-        <h2 className="sign-in">Sign In</h2>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            className="input"
-            type="email"
-            name="email"
-            placeholder="Enter email"
-            value={form.username}
-            onChange={(e) =>
-              setForm((prev) => ({ ...prev, username: e.target.value }))
-            }
-          />
-          <input
-            className="input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={(e) =>
-              setForm((prev) => ({ ...prev, password: e.target.value }))
-            }
-          />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>
-            Log In
-          </button>
-        </form>
-        <a className="sign-up">
-          <NavLink to="/signup"> Sign Up</NavLink>
-        </a>
+    <main className="login-page">
+      <div className="login-container">
+        <h1 className="title">Walker</h1>
+        <div className="form-cont">
+          <h2 className="sign-in">Sign In</h2>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={form.username}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, username: e.target.value }))
+              }
+            />
+            <input
+              className="input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={(e) =>
+                setForm((prev) => ({ ...prev, password: e.target.value }))
+              }
+            />
+            <button type="submit" onClick={(e) => handleSubmit(e)}>
+              Continue
+            </button>
+          </form>
+
+          <h2 className="divider">or</h2>
+
+          <a className="sign-up">
+            <NavLink to="/signup"> Sign Up</NavLink>
+          </a>
+        </div>
       </div>
     </main>
   );

@@ -1,9 +1,16 @@
 .forecast {
-  border-bottom: 1px solid #252525;
+  height: 165px;
+  margin: 5px 0 10px;
+  width: 100vw;
+  background-color: light-dark(var(--light-box), var(--dark-box));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 3px rgba(158, 158, 158, 0.75);
 }
 
 .forecast-content {
-  margin: 1.1rem 1.8rem 1.1rem 1.8rem;
+  width: 90%;
 }
 
 .forecast-heading {
@@ -14,9 +21,23 @@ h5 {
   margin: 10px 0 10px 0;
 }
 
+.main-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .posts-list {
   display: flex;
   flex-direction: column;
+}
+
+.post-cont {
+  border-radius: 19px;
+  width: 390px;
+  background-color: light-dark(var(--light-box), var(--dark-box));
+  margin-bottom: 5px;
+  box-shadow: 2px 2px 3px rgba(158, 158, 158, 0.75);
 }
 
 .cond-text-cont {

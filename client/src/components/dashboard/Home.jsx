@@ -24,7 +24,7 @@ function Home() {
     <>
       <div>
         {weather && weather.current ? (
-          <section className="post-cont forecast">
+          <section className="forecast">
             <div className="forecast-content">
               <h4 className="forecast-heading">Todays walking forecast</h4>
 

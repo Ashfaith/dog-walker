@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./utils/AuthContext";
+import "./login.css";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -57,54 +58,62 @@ function SignUp() {
   };
 
   return (
-    <>
-      <h2>SIGN UP</h2>
-      <form onClick={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          name="first-name"
-          placeholder="First name"
-          value={form.firstName}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, firstName: e.target.value }))
-          }
-        />
-        <input
-          type="text"
-          name="last-name"
-          placeholder="Last name"
-          value={form.lastName}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, lastName: e.target.value }))
-          }
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => {
-            setForm((prev) => ({ ...prev, email: e.target.value }));
-          }}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.pw}
-          onChange={(e) => {
-            setForm((prev) => ({ ...prev, pw: e.target.value }));
-          }}
-        />
-        <input
-          type="password"
-          name="confirm"
-          placeholder="Cofirm password"
-          onChange={(e) => setConfirm(e.target.value)}
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-    </>
+    <main className="login-page">
+      <div className="login-container">
+        <h1 className="title">Walker</h1>
+        <h3 className="sign-up">Sign Up</h3>
+        <form onClick={(e) => handleSubmit(e)}>
+          <input
+            className="input"
+            type="text"
+            name="first-name"
+            placeholder="First name"
+            value={form.firstName}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, firstName: e.target.value }))
+            }
+          />
+          <input
+            className="input"
+            type="text"
+            name="last-name"
+            placeholder="Last name"
+            value={form.lastName}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, lastName: e.target.value }))
+            }
+          />
+          <input
+            className="input"
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => {
+              setForm((prev) => ({ ...prev, email: e.target.value }));
+            }}
+          />
+          <input
+            className="input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.pw}
+            onChange={(e) => {
+              setForm((prev) => ({ ...prev, pw: e.target.value }));
+            }}
+          />
+          <input
+            className="input"
+            type="password"
+            name="confirm"
+            placeholder="Cofirm password"
+            onChange={(e) => setConfirm(e.target.value)}
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </main>
   );
 }
 
