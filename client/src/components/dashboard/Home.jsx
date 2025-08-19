@@ -52,18 +52,15 @@ function Home() {
       <main>
         <ul className="posts-list">
           {posts.map((post) => (
-            <li key={post.id} className="post-cont">
+            <li key={post.id} className="post-card">
               <section className="content-container">
-                <div className="post-left-side">
-                  <div className="post-user-info">
-                    <h4>{`${post.firstName} ${post.lastName}`}</h4>
-                    <p className="post-date">{dateConvert(post.created)}</p>
-                  </div>
+                <div className="post-user-info">
+                  <h4>{`${post.firstName} ${post.lastName}`}</h4>
+                  <p className="post-date">{dateConvert(post.created)}</p>
+                </div>
 
-                  <div className="title-desc-cont">
-                    <h3 className="post-title">{post.title}</h3>
-                    <p className="post-description">{post.content}</p>
-                  </div>
+                <div className="title-desc-cont">
+                  <h3 className="post-title">{post.title}</h3>
                 </div>
 
                 <div className="stats-cont">

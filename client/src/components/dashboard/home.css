@@ -27,19 +27,6 @@ h5 {
   flex-direction: column;
 }
 
-.posts-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.post-cont {
-  border-radius: 19px;
-  width: 390px;
-  background-color: light-dark(var(--light-box), var(--dark-box));
-  margin-bottom: 5px;
-  box-shadow: 2px 2px 3px rgba(158, 158, 158, 0.75);
-}
-
 .cond-text-cont {
   width: 100%;
   display: flex;
@@ -54,6 +41,20 @@ h5 {
   justify-content: space-evenly;
 }
 
+.posts-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card {
+  border-radius: 19px;
+  width: 384px;
+  height: 170px;
+  background-color: light-dark(var(--light-box), var(--dark-box));
+  margin-bottom: 14px;
+  box-shadow: 3px 3px 7px rgba(170, 170, 170, 0.75);
+}
+
 .stats-cont {
   display: flex;
   flex-direction: row;
@@ -62,13 +63,20 @@ h5 {
 .content-container {
   margin: 1.5rem 6rem 1rem 1.8rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 .post-user-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
   gap: 0.2rem;
+}
+
+.post-user-info * {
+  font-style: italic;
 }
 
 .post-user-info > p {
@@ -79,14 +87,17 @@ h5 {
   margin: 0.8rem 0 0.8rem 0;
 }
 
-.post-description {
-  font-size: var(--info-size);
+.post-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-style: italic;
 }
 
 .stats-cont {
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 1em;
+  flex-direction: row;
+  gap: 5em;
 }
 
 .stats-box > p {

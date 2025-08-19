@@ -43,7 +43,8 @@
   background-color: aliceblue;
 }
 
-.play, .pause {
+.play,
+.pause {
   z-index: 1;
 }
 
@@ -53,9 +54,9 @@
 }
 
 .slide-left {
-  transform: translateX(28px);
+  transform: translateX(34px);
 }
 
 .slide-right {
-  transform: translateX(-38px);
+  transform: translateX(-32px);
 }

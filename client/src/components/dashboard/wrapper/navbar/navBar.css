@@ -1,7 +1,7 @@
 .navContainer {
   display: flex;
   align-items: center;
-  background-color: grey;
+  background-color: #dddddd;
   width: 100vw;
   height: 69px;
   z-index: 9999;
@@ -21,4 +21,23 @@ ul {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.nav-icon {
+  font-size: 25px;
+}
+
+.link-button {
+  background-color: #dddddd;
+  color: black;
+  padding: 7px 22px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  background-color: #3bf675;
 }
