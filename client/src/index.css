@@ -9,6 +9,7 @@
   --light-bg: #d3d3d3;
   --light-box: rgba(59, 246, 117, 0.18);
   --light-accent: #3bf675;
+  --light-card: #dddddd;
   --light-title: rgb(0, 0, 0);
 
   --dark-text: rgb(255, 255, 255);
@@ -47,7 +48,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 button {

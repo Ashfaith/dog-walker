@@ -80,15 +80,17 @@ function Followers() {
   };
 
   return (
-    <div className="friends-content">
-      <Link to="/dashboard/people-search">
-        <div className="search-container">
-          <span className="search-icon">
-            <IoIosSearch />
-          </span>
-          <input className="search-bar" placeholder="Search people" />
-        </div>
-      </Link>
+    <div className="followers-content">
+      <div className="mock-search-container">
+        <Link to="/dashboard/people-search">
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search people"
+            readOnly
+          />
+        </Link>
+      </div>
 
       {!requests || requests.length <= 0 ? null : (
         <div className="requests-container">
@@ -117,29 +119,27 @@ function Followers() {
 
       <section className="followers-section">
         <h3>Followers</h3>
-        <div className="grid-container">
-          <ul className="follower-list">
-            {!followers
-              ? null
-              : followers.map((follower, index) => (
-                  <li className="follower-container" key={index}>
-                    <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
-                    {follower.following === false ? (
-                      <p>pending</p>
-                    ) : !follower.following ? (
-                      <FollowButton
-                        follower={follower}
-                        textTrue={"Requested"}
-                        textFalse={"Follow"}
-                        onClick={() => sendFollowRequest(follower.followerId)}
-                      />
-                    ) : (
-                      <p>Following</p>
-                    )}
-                  </li>
-                ))}
-          </ul>
-        </div>
+        <ul className="follower-list">
+          {!followers
+            ? null
+            : followers.map((follower, index) => (
+                <li className="follower-container" key={index}>
+                  <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
+                  {follower.following === false ? (
+                    <p>pending</p>
+                  ) : !follower.following ? (
+                    <FollowButton
+                      follower={follower}
+                      textTrue={"Requested"}
+                      textFalse={"Follow"}
+                      onClick={() => sendFollowRequest(follower.followerId)}
+                    />
+                  ) : (
+                    <p>Following</p>
+                  )}
+                </li>
+              ))}
+        </ul>
       </section>
     </div>
   );

@@ -49,7 +49,7 @@ async function fetchMap(req, res) {
   const { z, x, y } = req.params;
   try {
     const response = await axios.get(
-      `https://tile.jawg.io/jawg-dark/${z}/${x}/${y}.png?access-token=${token}`,
+      `https://tile.jawg.io/jawg-light/${z}/${x}/${y}.png?access-token=${token}`,
       { responseType: "arraybuffer" }
     );
     res.setHeader("Content-Type", "image/png");

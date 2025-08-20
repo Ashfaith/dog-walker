@@ -58,9 +58,9 @@ function Login() {
 
           <h2 className="divider">or</h2>
 
-          <a className="sign-up">
+          <div className="sign-up">
             <NavLink to="/signup"> Sign Up</NavLink>
-          </a>
+          </div>
         </div>
       </div>
     </main>

@@ -3,10 +3,12 @@ import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L, { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./record.css";
-import recImage from "../../assets/rec.png";
+import { FaRegCircle } from "react-icons/fa6";
+import { FaCircle } from "react-icons/fa6";
 import Stopwatch from "../utils/Timer";
 import ActivityDrawer from "../utils/ActivityDrawer";
 import { convertToKm } from "../utils/helpers";
+import { renderToString } from "react-dom/server";
 
 export const DrawerContext = createContext(null);
 
@@ -76,10 +78,15 @@ function Record() {
     setHistoricalPos((prev) => [currentPos, ...prev]);
   }, [currentPos]);
 
-  // Custom icon for map. <a href="https://www.flaticon.com/free-icons/dot" title="dot icons">Dot icons created by iconixar - Flaticon</a>
-  const customIcon = new Icon({
-    iconUrl: recImage,
-    iconSize: [30, 30],
+  const topIcon = L.divIcon({
+    className: "",
+    html: renderToString(<FaCircle className="top-icon" />),
+  });
+
+  const bottomIcon = L.divIcon({
+    className: "",
+    html: renderToString(<FaRegCircle className="bottom-icon" size={30} />),
+    iconSize: [32, 32],
   });
 
   useEffect(() => {
@@ -102,8 +109,13 @@ function Record() {
             url="http://localhost:3000/dashboard/map/{z}/{x}/{y}"
             attribution='<a href="https://www.jawg.io?utm_medium=map&utm_source=attribution" target="_blank">&copy; Jawg</a> - <a href="https://www.openstreetmap.org?utm_medium=map-attribution&utm_source=jawg" target="_blank">&copy; OpenStreetMap</a>&nbsp;contributors'
           />
-          <Marker position={currentPos} icon={customIcon} />
-          <Polyline pathOptions={{ color: "blue" }} positions={historicalPos} />
+          <Marker className="top-icon" position={currentPos} icon={topIcon} />
+          <Marker
+            className="bottom-icon"
+            position={currentPos}
+            icon={bottomIcon}
+          />
+          <Polyline positions={historicalPos} />
         </MapContainer>
       )}
       <DrawerContext.Provider value={{ isOpen, setIsOpen }}>

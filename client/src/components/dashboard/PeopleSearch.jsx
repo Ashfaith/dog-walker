@@ -59,7 +59,7 @@ function PeopleSearch() {
       <div className="search-container">
         <form onSubmit={(e) => searchUsers(e)}>
           <input
-            className="search-people-bar"
+            className="search-bar"
             type="text"
             placeholder="Search people"
             onChange={(e) => setSearchValue(e.target.value)}

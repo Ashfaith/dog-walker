@@ -22,6 +22,7 @@ function Home() {
 
   return (
     <>
+      {console.log(weather)}
       <div>
         {weather && weather.current ? (
           <section className="forecast">
@@ -49,7 +50,7 @@ function Home() {
           <div>Loading...</div>
         )}
       </div>
-      <main>
+      <section className="posts-section">
         <ul className="posts-list">
           {posts.map((post) => (
             <li key={post.id} className="post-card">
@@ -77,7 +78,7 @@ function Home() {
             </li>
           ))}
         </ul>
-      </main>
+      </section>
     </>
   );
 }
