@@ -74,7 +74,7 @@ async function getUsersByName(userName: string, userId: string) {
       lastName: usersTable.lastName,
       email: usersTable.email,
       follows: follows.approve,
-      followedBy: followedBy.approve,
+      following: followedBy.approve,
     })
     .from(usersTable)
     .leftJoin(
@@ -180,14 +180,13 @@ async function updatePassword(userId: string, newPassword: string) {
 
 async function createPost(
   title: string,
-  content: string,
   distance: string,
   time: string,
   user_id: string
 ) {
   return await db
     .insert(posts)
-    .values({ title, content, distance, time, user_id })
+    .values({ title, distance, time, user_id })
     .returning();
 }
 

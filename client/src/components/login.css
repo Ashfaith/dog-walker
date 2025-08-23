@@ -1,31 +1,35 @@
 .login-page {
-  background: #bcd0c3;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background: linear-gradient(
     292deg,
     rgba(188, 208, 195, 1) 0%,
     rgba(107, 199, 135, 1) 82%,
     rgba(74, 231, 123, 1) 100%
   );
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
 }
 
 .login-container {
   display: flex;
-  width: 90%;
-  height: 500px;
+  width: 100%;
+  max-width: 500px;
   flex-direction: column;
   align-items: center;
-  margin-top: 25%;
+  /* justify-content: center; */
+  margin-top: -8em;
+  padding: 20px;
 }
 
-.login-container .form-cont form {
+.form-cont {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 97%;
 }
 
 .title {
@@ -43,6 +47,7 @@
   margin-bottom: 30px;
   font-size: 20px;
   font-weight: 600;
+  width: 100%;
 }
 
 .sign-up {
@@ -53,14 +58,14 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
 .input {
-  width: 260px;
+  box-sizing: border-box;
+  width: 100%;
   height: 45px;
   line-height: 30px;
-  padding: 0 5rem;
-  padding-left: 1rem;
   border: 1px solid transparent;
   border-radius: 8px;
   outline: none;
@@ -68,6 +73,9 @@ form {
   border-color: rgb(199, 199, 199);
   color: #0d0c22;
   transition: 0.5s ease;
+  padding: 0;
+  margin-top: 0;
+  padding-left: 1em;
 }
 
 .input::placeholder {
@@ -83,7 +91,7 @@ input:hover {
 }
 
 button {
-  width: 358px;
+  width: 100%;
   background-color: #000000;
   color: #ffffff;
   font-size: 16px;
@@ -97,6 +105,7 @@ button {
   color: #828282;
   font-weight: 200;
   font-size: 20px;
+  width: 100%;
 }
 
 .divider::before,

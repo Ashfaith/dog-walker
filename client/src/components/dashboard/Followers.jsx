@@ -80,68 +80,70 @@ function Followers() {
   };
 
   return (
-    <div className="followers-content">
-      <div className="mock-search-container">
-        <Link to="/dashboard/people-search">
+    <>
+      <div className="search-container">
+        <Link className="search-wrapper" to="/dashboard/people-search">
           <input
             type="text"
             className="search-bar"
+            name="search"
             placeholder="Search people"
             readOnly
           />
         </Link>
       </div>
-
-      {!requests || requests.length <= 0 ? null : (
-        <div className="requests-container">
-          <h3>Requests</h3>
-          <ul>
-            {requests.map((request, index) => (
-              <li className="request-alert" key={index}>
-                <h4>{request.requesterName}</h4>
-                <div className="button-container">
-                  <FollowButton
-                    className="accept"
-                    textFalse={"Accept"}
-                    textTrue={"Accepted"}
-                    onClick={() => handleRequest(true, request.requestId)}
-                  />
-                  <IoIosClose
-                    className="deny-button"
-                    onClick={() => handleRequest(false, request.requestId)}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <section className="followers-section">
-        <h3>Followers</h3>
-        <ul className="follower-list">
-          {!followers
-            ? null
-            : followers.map((follower, index) => (
-                <li className="follower-container" key={index}>
-                  <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
-                  {follower.following === false ? (
-                    <p>pending</p>
-                  ) : !follower.following ? (
+      <div className="followers-content">
+        {!requests || requests.length <= 0 ? null : (
+          <div className="requests-container">
+            <h3>Requests</h3>
+            <ul>
+              {requests.map((request, index) => (
+                <li className="request-alert" key={index}>
+                  <h4>{request.requesterName}</h4>
+                  <div className="button-container">
                     <FollowButton
-                      follower={follower}
-                      textTrue={"Requested"}
-                      textFalse={"Follow"}
-                      onClick={() => sendFollowRequest(follower.followerId)}
+                      className="accept"
+                      textFalse={"Accept"}
+                      textTrue={"Accepted"}
+                      onClick={() => handleRequest(true, request.requestId)}
                     />
-                  ) : (
-                    <p>Following</p>
-                  )}
+                    <IoIosClose
+                      className="deny-button"
+                      onClick={() => handleRequest(false, request.requestId)}
+                    />
+                  </div>
                 </li>
               ))}
-        </ul>
-      </section>
-    </div>
+            </ul>
+          </div>
+        )}
+
+        <section className="followers-section">
+          <h3>Followers</h3>
+          <ul className="follower-list">
+            {!followers
+              ? null
+              : followers.map((follower, index) => (
+                  <li className="follower-container" key={index}>
+                    <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
+                    {follower.following === false ? (
+                      <p>pending</p>
+                    ) : !follower.following ? (
+                      <FollowButton
+                        follower={follower}
+                        textTrue={"Requested"}
+                        textFalse={"Follow"}
+                        onClick={() => sendFollowRequest(follower.followerId)}
+                      />
+                    ) : (
+                      <p>Following</p>
+                    )}
+                  </li>
+                ))}
+          </ul>
+        </section>
+      </div>
+    </>
   );
 }
 

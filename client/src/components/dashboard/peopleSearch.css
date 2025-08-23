@@ -5,23 +5,11 @@
 }
 
 .search-container {
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
   position: relative;
-  width: 98%;
-}
-
-/* .search-bar {
-  padding: 0.7em 2em;
   width: 100%;
-  margin-top: 12px;
-  border-radius: 8px;
-  height: 12px;
-  background-color: white;
-  color: #000000;
-  outline: none;
-  border: none;
-  text-align: left;
-} */
+}
 
 .search-button {
   position: absolute;
@@ -31,6 +19,7 @@
   transform: translateY(-22%);
   background-color: #818181;
   height: 12px;
+  margin-right: 5px;
 }
 
 .search-icon-overlay {
@@ -58,7 +47,7 @@
   margin: 5px 10px 5px 10px;
 }
 
-.found-user > button {
+.follow-action-container {
   height: 30px;
   width: 80px;
   display: flex;

@@ -36,9 +36,12 @@
   width: 30px;
 }
 
-.mock-search-container {
-  margin-left: 0.25em;
-  width: 98%;
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
 }
 
 .search-icon {
@@ -51,6 +54,13 @@
   position: relative;
   left: 8px;
   color: #b1b1b1;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 98%;
 }
 
 .search-bar {

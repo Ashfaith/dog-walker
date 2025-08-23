@@ -21,7 +21,9 @@ const ActivityDrawer = ({ children }) => {
       direction="bottom"
       className="activity-drawer"
     >
-      <button onClick={toggleDrawer}>x</button>
+      <div className="back-container">
+        <button className="close-button" onClick={toggleDrawer}></button>
+      </div>
       <div className="drawer-content">{children}</div>
     </Drawer>
   );

@@ -20,13 +20,7 @@ async function submitPost(req, res) {
   try {
     let { title, distance, time } = req.body;
     const user = req.user;
-    const post = await models.createPost(
-      title,
-      content,
-      distance,
-      time,
-      user.id
-    );
+    const post = await models.createPost(title, distance, time, user.id);
     res.json(post);
   } catch (err) {
     res.status(500).json({ message: err.message });

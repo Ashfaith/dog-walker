@@ -55,46 +55,53 @@ function PeopleSearch() {
   };
 
   return (
-    <section className="search-content">
-      <div className="search-container">
-        <form onSubmit={(e) => searchUsers(e)}>
-          <input
-            className="search-bar"
-            type="text"
-            placeholder="Search people"
-            onChange={(e) => setSearchValue(e.target.value)}
-            value={searchValue}
-          />
-          <button className="search-button" type="submit">
-            <IoIosSearch className="search-icon-overlay" />
-          </button>
-        </form>
+    <>
+      <div className="search-wrapper">
+        <div className="search-container">
+          <form onSubmit={(e) => searchUsers(e)}>
+            <input
+              className="search-bar"
+              type="text"
+              placeholder="Search people"
+              onChange={(e) => setSearchValue(e.target.value)}
+              value={searchValue}
+            />
+            <button className="search-button" type="submit">
+              <IoIosSearch className="search-icon-overlay" />
+            </button>
+          </form>
+        </div>
       </div>
-      <div className="result-container">
-        <h5>Search results</h5>
-        <ul>
-          {!foundUsers
-            ? null
-            : foundUsers.map((follower, index) => (
-                <li className="found-user" key={index}>
-                  <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
-                  {follower.following === false ? (
-                    <p>pending</p>
-                  ) : !follower.following ? (
-                    <FollowButton
-                      follower={follower}
-                      textTrue={"Requested"}
-                      textFalse={"Follow"}
-                      onClick={() => sendFollowRequest(follower.id)}
-                    />
-                  ) : (
-                    <p>Watching your walks!</p>
-                  )}
-                </li>
-              ))}
-        </ul>
-      </div>
-    </section>
+      <section className="search-content">
+        <div className="result-container">
+          <h5>Search results</h5>
+          <ul>
+            {!foundUsers
+              ? null
+              : foundUsers.map((follower, index) => (
+                  <li className="found-user" key={index}>
+                    <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
+                    <div className="follow-action-container">
+                      {follower.following === false ? (
+                        <p>pending</p>
+                      ) : !follower.following ? (
+                        <FollowButton
+                          follower={follower}
+                          textTrue={"Requested"}
+                          textFalse={"Follow"}
+                          onClick={() => sendFollowRequest(follower.id)}
+                        />
+                      ) : (
+                        <p>Following</p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+          </ul>
+        </div>
+      </section>
+      {console.log("followers:", foundUsers)}
+    </>
   );
 }
 

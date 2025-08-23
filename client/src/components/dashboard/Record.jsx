@@ -126,21 +126,39 @@ function Record() {
         />
         <ActivityDrawer>
           <>
-            <h1>Create post</h1>
-            <h2>Distance: {distanceTotal}km</h2>
-            <h2>Time: {activityTime}</h2>
+            <div className="header-container">
+              <h3>Latest Activity</h3>
+            </div>
+
             <form onSubmit={(e) => handleSubmit(e)}>
-              <input
-                type="text"
-                name="title"
-                placeholder="Name your walk"
-                value={post.title}
-                onChange={(e) =>
-                  setPost((prev) => ({ ...prev, title: e.target.value }))
-                }
-                required
-              />
-              <button type="submit">POST</button>
+              <div className="title-cont">
+                <input
+                  className="activity-title"
+                  type="text"
+                  name="title"
+                  placeholder="Name your walk"
+                  value={post.title}
+                  onChange={(e) =>
+                    setPost((prev) => ({ ...prev, title: e.target.value }))
+                  }
+                  required
+                />
+              </div>
+
+              <div className="stats-container">
+                <div className="distance-cont">
+                  <p>Distance</p>
+                  <h4>{distanceTotal}km</h4>
+                </div>
+                <div className="time-cont">
+                  <p>Time: </p>
+                  <h4>{activityTime}</h4>
+                </div>
+              </div>
+
+              <div className="button-container">
+                <button type="submit">Save Activity</button>
+              </div>
             </form>
           </>
         </ActivityDrawer>
