@@ -205,9 +205,9 @@ async function queryPosts(currentUser: string) {
     })
     .from(posts)
     .innerJoin(usersTable, eq(posts.user_id, usersTable.id))
-    .innerJoin(
+    .leftJoin(
       userFollow,
-      and(eq(userFollow.uid1, usersTable.id), eq(userFollow.approve, true))
+      and(eq(userFollow.uid2, usersTable.id), eq(userFollow.approve, true))
     )
     .where(
       or(

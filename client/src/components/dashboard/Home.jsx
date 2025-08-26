@@ -9,6 +9,21 @@ function Home() {
   const posts = useContext(PostsContext);
   const [walkingConditions, setWalkingConditions] = useState();
 
+  const [sortedPosts, setSortedPosts] = useState(null);
+
+  const sortDateDescending = (postsArr) => {
+    const sortedArr = postsArr.sort(
+      (a, b) => new Date(b.created) - new Date(a.created)
+    );
+    return sortedArr;
+  };
+
+  useEffect(() => {
+    const dateDescending = sortDateDescending(posts);
+    console.log("sorted:", dateDescending);
+    setSortedPosts(dateDescending);
+  }, [posts]);
+
   useEffect(() => {
     if (!weather?.current?.temp_c) return;
 
@@ -22,7 +37,6 @@ function Home() {
 
   return (
     <>
-      {console.log(weather)}
       <div>
         {weather && weather.current ? (
           <section className="forecast">
@@ -50,33 +64,42 @@ function Home() {
           <div>Loading...</div>
         )}
       </div>
+
       <section className="posts-section">
         <ul className="posts-list">
-          {posts.map((post) => (
-            <li key={post.id} className="post-card">
-              <section className="content-container">
-                <div className="post-user-info">
-                  <h4>{`${post.firstName} ${post.lastName}`}</h4>
-                  <p className="post-date">{dateConvert(post.created)}</p>
-                </div>
-
-                <div className="title-desc-cont">
-                  <h3 className="post-title">{post.title}</h3>
-                </div>
-
-                <div className="stats-cont">
-                  <div className="stats-box">
-                    <p>Distance</p>
-                    <h5 className="post-distance">{post.distance}km</h5>
+          {!sortedPosts ? (
+            <div>Getting posts</div>
+          ) : (
+            sortedPosts.map((post) => (
+              <li key={post.id} className="post-card">
+                <section className="content-container">
+                  <div className="post-user-info">
+                    <div className="name-date-container">
+                      <h4>{`${post.firstName} ${post.lastName}`}</h4>
+                    </div>
+                    <div className="name-date-container">
+                      <p className="post-date">{dateConvert(post.created)}</p>
+                    </div>
                   </div>
-                  <div className="stats-box">
-                    <p>Time</p>
-                    <h5 className="post-time">{post.time}</h5>
+
+                  <div className="title-desc-cont">
+                    <h3 className="post-title">{post.title}</h3>
                   </div>
-                </div>
-              </section>
-            </li>
-          ))}
+
+                  <div className="stats-cont">
+                    <div className="stats-box">
+                      <p>Distance</p>
+                      <h5 className="post-distance">{post.distance}km</h5>
+                    </div>
+                    <div className="stats-box">
+                      <p>Time</p>
+                      <h5 className="post-time">{post.time}</h5>
+                    </div>
+                  </div>
+                </section>
+              </li>
+            ))
+          )}
         </ul>
       </section>
     </>
