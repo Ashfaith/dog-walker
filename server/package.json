@@ -6,7 +6,9 @@
     "dev": "tsx src/index.ts",
     "drizGen": "npx drizzle-kit generate",
     "drizPush": "npx drizzle-kit push",
-    "devStart": "nodemon index.ts"
+    "devStart": "nodemon index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",

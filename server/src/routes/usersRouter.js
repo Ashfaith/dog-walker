@@ -10,7 +10,7 @@ router.get("/users-by-name", ensureAuthenticated, controller.usersByName);
 router.get("/users-by-email", ensureAuthenticated, controller.usersByEmail);
 
 //Create user
-router.post("/createUser", validateCreate, controller.createUser);
+// router.post("/createUser", validateCreate, controller.createUser);
 
 //Load user
 router.get("/:id", ensureAuthenticated, getUser, (req, res) => {
