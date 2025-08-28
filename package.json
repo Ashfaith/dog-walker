@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "drizzle-kit": "^0.31.4",
     "prettier": "^3.6.2"
   }
 }
