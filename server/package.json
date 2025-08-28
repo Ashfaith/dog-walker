@@ -2,7 +2,6 @@
   "name": "dog_walker",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
     "drizGen": "npx drizzle-kit generate",
