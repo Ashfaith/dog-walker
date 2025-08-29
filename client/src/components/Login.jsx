@@ -11,7 +11,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
@@ -65,11 +65,11 @@ function Login() {
             </button>
           </form>
 
-          {/* <h2 className="divider">or</h2> */}
+          <h2 className="divider">or</h2>
 
-          {/* <div className="sign-up">
+          <div className="sign-up">
             <NavLink to="/signup"> Sign Up</NavLink>
-          </div> */}
+          </div>
         </div>
       </div>
     </main>
