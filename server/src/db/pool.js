@@ -10,7 +10,7 @@ const poolConfig = isProduction
       connectionString: process.env.DATABASE_URL,
       ssl: {
         rejectUnauthorized: true,
-        ca: process.env.DATABASE_CA_CERT,
+        ca: process.env.DATABASE_CA_CERT?.replace(/\\n/g, "\n"),
       },
     }
   : {
