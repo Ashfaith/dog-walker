@@ -42,7 +42,6 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
     if (!validatePassword()) return;
     const res = await fetch(
       `${import.meta.env.VITE_API_URL}/users/createUser`,
