@@ -9,7 +9,7 @@ export default defineConfig({
     connectionString: process.env.DATABASE_URL!,
     ssl: {
       rejectUnauthorized: true,
-      ca: require("fs").readFileSync("./certs/ca-certificate.crt").toString(),
+      ca: process.env.DATABASE_CA_CERT,
     },
   },
 });
