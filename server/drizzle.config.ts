@@ -6,7 +6,7 @@ export default defineConfig({
   schema: "./src/db/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
-    host: process.env.DATABASE_URL!,
+    connectionString: process.env.DATABASE_URL!,
     ssl: {
       rejectUnauthorized: true,
       ca: process.env.CA_CERT,
