@@ -25,8 +25,7 @@ function SignUp() {
   const attemptLogin = async () => {
     const creds = { username: form.email, password: form.pw };
 
-    const res = await fetch("${import.meta.env.VITE_API_URL}
-/auth/login", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -45,12 +44,14 @@ function SignUp() {
     e.preventDefault();
     console.log(form);
     if (!validatePassword()) return;
-    const res = await fetch("${import.meta.env.VITE_API_URL}
-/users/createUser", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/createUser`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      }
+    );
 
     const data = await res.json();
 

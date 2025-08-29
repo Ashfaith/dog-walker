@@ -6,8 +6,7 @@ export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(null);
 
   useEffect(() => {
-    fetch("${import.meta.env.VITE_API_URL}
-/auth/check", {
+    fetch(`${import.meta.env.VITE_API_URL}/auth/check`, {
       credentials: "include",
     })
       .then((res) => res.json())

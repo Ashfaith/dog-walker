@@ -11,12 +11,14 @@ function Dashboard() {
 
   const getPosts = async () => {
     try {
-      const res = await fetch("${import.meta.env.VITE_API_URL}
-/dashboard/display-posts", {
-        method: "GET",
-        headers: { "content-type": "application/json" },
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/dashboard/display-posts`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+          credentials: "include",
+        }
+      );
 
       if (res.ok) {
         const data = await res.json();

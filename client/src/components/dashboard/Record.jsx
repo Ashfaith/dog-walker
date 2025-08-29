@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import "../../assets/leaflet.css";
 import "./record.css";
 import { FaRegCircle } from "react-icons/fa6";
 import { FaCircle } from "react-icons/fa6";

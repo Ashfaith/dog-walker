@@ -13,12 +13,10 @@ function PeopleSearch() {
     let queryParam = "name";
 
     if (searchValue.includes("@")) {
-      request = "${import.meta.env.VITE_API_URL}
-/users/users-by-email";
+      request = `${import.meta.env.VITE_API_URL}/users/users-by-email`;
       queryParam = "email";
     } else {
-      request = "${import.meta.env.VITE_API_URL}
-/users/users-by-name";
+      request = `${import.meta.env.VITE_API_URL}/users/users-by-name`;
     }
 
     try {
@@ -45,13 +43,15 @@ function PeopleSearch() {
 
   const sendFollowRequest = async (id) => {
     try {
-      const res = await fetch("${import.meta.env.VITE_API_URL}
-/followers/request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ id }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/followers/request`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ id }),
+        }
+      );
     } catch (err) {
       console.error("Network or parsing error:", err);
     }

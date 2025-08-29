@@ -11,18 +11,26 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("${import.meta.env.VITE_API_URL}
-/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(form),
-    });
+    console.log(form);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(form),
+      });
 
-    if (res.ok) {
-      setAuth(true);
-      navigate("/dashboard");
-    } else alert("Login failed");
+      if (res.ok) {
+        setAuth(true);
+        navigate("/dashboard");
+      } else {
+        const errData = await res.json();
+        const errMessage = errData.message;
+        console.error("init Error:", errMessage);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
   };
 
   return (
