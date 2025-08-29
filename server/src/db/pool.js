@@ -1,8 +1,6 @@
 require("dotenv").config();
 const { Pool } = require("pg");
 
-console.log("DB URL:", process.env.DATABASE_URL);
-
 const isProduction = process.env.NODE_ENV === "production";
 
 const poolConfig = isProduction
