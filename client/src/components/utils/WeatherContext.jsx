@@ -25,7 +25,8 @@ export function WeatherProvider({ children }) {
 
   useEffect(() => {
     if (location !== null) {
-      fetch(`http://localhost:3000/dashboard/weather?location=${location}`)
+      fetch(`${import.meta.env.VITE_API_URL}
+/dashboard/weather?location=${location}`)
         .then((res) => res.json())
         .then((data) => setWeather(data));
     }

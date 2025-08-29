@@ -13,10 +13,12 @@ function PeopleSearch() {
     let queryParam = "name";
 
     if (searchValue.includes("@")) {
-      request = "http://localhost:3000/users/users-by-email";
+      request = "${import.meta.env.VITE_API_URL}
+/users/users-by-email";
       queryParam = "email";
     } else {
-      request = "http://localhost:3000/users/users-by-name";
+      request = "${import.meta.env.VITE_API_URL}
+/users/users-by-name";
     }
 
     try {
@@ -43,7 +45,8 @@ function PeopleSearch() {
 
   const sendFollowRequest = async (id) => {
     try {
-      const res = await fetch("http://localhost:3000/followers/request", {
+      const res = await fetch("${import.meta.env.VITE_API_URL}
+/followers/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

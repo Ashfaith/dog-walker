@@ -1,12 +1,15 @@
-GET http://localhost:3000/users
+GET ${import.meta.env.VITE_API_URL}
+/users
 
 ###
 
-GET http://localhost:3000/users/b4037141-dc2a-44f5-9d52-a0ec80d6af09
+GET ${import.meta.env.VITE_API_URL}
+/users/b4037141-dc2a-44f5-9d52-a0ec80d6af09
 
 ###
 
-POST http://localhost:3000/users/createUser
+POST ${import.meta.env.VITE_API_URL}
+/users/createUser
 Content-Type: application/json
 
 {
@@ -18,10 +21,12 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/users/0a966a12-5790-45aa-8a41-aa4e1c1e3f90
+DELETE ${import.meta.env.VITE_API_URL}
+/users/0a966a12-5790-45aa-8a41-aa4e1c1e3f90
 
 ###
-PATCH http://localhost:3000/users/642f1c5a-d5da-4f5e-a059-26f012a71b6b
+PATCH ${import.meta.env.VITE_API_URL}
+/users/642f1c5a-d5da-4f5e-a059-26f012a71b6b
 Content-Type: application/json
 
 {
@@ -29,7 +34,8 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/auth/login
+POST ${import.meta.env.VITE_API_URL}
+/auth/login
 Content-Type: application/json
 
 {
@@ -39,7 +45,8 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/auth/login
+POST ${import.meta.env.VITE_API_URL}
+/auth/login
 Content-Type: application/json
 
 {
@@ -49,11 +56,13 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/auth/test
+GET ${import.meta.env.VITE_API_URL}
+/auth/test
 
 ###
 
-PATCH http://localhost:3000/users/passwordUpdate/e6a06e2f-2e11-4f50-9db5-f009dfecb732
+PATCH ${import.meta.env.VITE_API_URL}
+/users/passwordUpdate/e6a06e2f-2e11-4f50-9db5-f009dfecb732
 Content-Type: application/json
 
 {
@@ -61,19 +70,23 @@ Content-Type: application/json
 }
 
 ###
-http://localhost:3000/dashboard/weather
+${import.meta.env.VITE_API_URL}
+/dashboard/weather
 
 
 ###
-POST http://localhost:3000/followers/request
+POST ${import.meta.env.VITE_API_URL}
+/followers/request
 
 ###
 
-GET  http://localhost:3000/followers/view-requests
+GET  ${import.meta.env.VITE_API_URL}
+/followers/view-requests
 
 ###
 
-PATCH http://localhost:3000/admin/passwordUpdate
+PATCH ${import.meta.env.VITE_API_URL}
+/admin/passwordUpdate
 Content-Type: application/json
 
 {

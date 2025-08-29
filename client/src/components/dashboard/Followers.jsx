@@ -9,7 +9,8 @@ function Followers() {
   const [requests, setRequests] = useState(null);
 
   const showFollowRequests = async () => {
-    const res = await fetch("http://localhost:3000/followers/view-requests", {
+    const res = await fetch("${import.meta.env.VITE_API_URL}
+/followers/view-requests", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -29,7 +30,8 @@ function Followers() {
 
   const getFollowers = async () => {
     try {
-      const res = await fetch("http://localhost:3000/followers/all-followers", {
+      const res = await fetch("${import.meta.env.VITE_API_URL}
+/followers/all-followers", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -51,7 +53,8 @@ function Followers() {
   //send requests
   const sendFollowRequest = async (id) => {
     try {
-      await fetch("http://localhost:3000/followers/request", {
+      await fetch("${import.meta.env.VITE_API_URL}
+/followers/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -66,7 +69,8 @@ function Followers() {
   const handleRequest = async (action, requestId) => {
     try {
       const res = await fetch(
-        "http://localhost:3000/followers/action-request",
+        "${import.meta.env.VITE_API_URL}
+/followers/action-request",
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

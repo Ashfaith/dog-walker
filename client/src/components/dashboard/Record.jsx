@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
-import L, { Icon } from "leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./record.css";
 import { FaRegCircle } from "react-icons/fa6";
@@ -9,6 +9,14 @@ import Stopwatch from "../utils/Timer";
 import ActivityDrawer from "../utils/ActivityDrawer";
 import { convertToKm } from "../utils/helpers";
 import { renderToString } from "react-dom/server";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "/images/marker-icon-2x.png",
+  iconUrl: "/images/marker-icon.png",
+  shadowUrl: "/images/marker-shadow.png",
+});
 
 export const DrawerContext = createContext(null);
 
@@ -27,12 +35,15 @@ function Record() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/dashboard/createPost", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(post),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/dashboard/createPost`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(post),
+      }
+    );
     if (res.ok) {
       alert("post created");
     }
@@ -106,7 +117,7 @@ function Record() {
       ) : (
         <MapContainer center={currentPos} zoom={17}>
           <TileLayer
-            url="http://localhost:3000/dashboard/map/{z}/{x}/{y}"
+            url={`${import.meta.env.VITE_API_URL}/dashboard/map/{z}/{x}/{y}`}
             attribution='<a href="https://www.jawg.io?utm_medium=map&utm_source=attribution" target="_blank">&copy; Jawg</a> - <a href="https://www.openstreetmap.org?utm_medium=map-attribution&utm_source=jawg" target="_blank">&copy; OpenStreetMap</a>&nbsp;contributors'
           />
           <Marker className="top-icon" position={currentPos} icon={topIcon} />

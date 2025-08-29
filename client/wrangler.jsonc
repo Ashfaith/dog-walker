@@ -1,5 +1,5 @@
 {
-  "name": "worker-name",
+  "name": "dog-walker",
   "compatibility_date": "2025-08-29",
   "main": "src/main.jsx",
 }

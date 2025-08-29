@@ -6,7 +6,8 @@ function Header() {
 
   const provideUser = async () => {
     try {
-      const res = await fetch("http://localhost:3000/dashboard/get-user", {
+      const res = await fetch("${import.meta.env.VITE_API_URL}
+/dashboard/get-user", {
         method: "GET",
         headers: { "content-type": "application/json" },
         credentials: "include",

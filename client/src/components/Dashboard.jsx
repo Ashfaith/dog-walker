@@ -11,7 +11,8 @@ function Dashboard() {
 
   const getPosts = async () => {
     try {
-      const res = await fetch("http://localhost:3000/dashboard/display-posts", {
+      const res = await fetch("${import.meta.env.VITE_API_URL}
+/dashboard/display-posts", {
         method: "GET",
         headers: { "content-type": "application/json" },
         credentials: "include",
