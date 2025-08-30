@@ -24,12 +24,10 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log("Deserializing user: ", user);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  console.log("Session:", req.session);
   try {
     const user = await models.getUserById(id);
 
