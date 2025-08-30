@@ -28,14 +28,15 @@ function Header() {
     provideUser();
   }, []);
 
-  return !user ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <header className="header">
       <h3>Walker</h3>
       <div>
-        <div className="user-display">{user.firstName}</div>
-        {/*change to image later */}
+        {!user ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="user-display">{user.firstName}</div>
+        )}
       </div>
     </header>
   );

@@ -20,7 +20,6 @@ function Home() {
 
   useEffect(() => {
     const dateDescending = sortDateDescending(posts);
-    console.log("sorted:", dateDescending);
     setSortedPosts(dateDescending);
   }, [posts]);
 

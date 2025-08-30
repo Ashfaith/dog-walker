@@ -11,7 +11,6 @@ function NavBar() {
   const handleClick = (e) => {
     const targetId = e.currentTarget.id;
     setActiveTab(targetId);
-    console.log(activeTab);
   };
 
   return (

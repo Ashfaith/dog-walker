@@ -103,7 +103,6 @@ function PeopleSearch() {
           </ul>
         </div>
       </section>
-      {console.log("followers:", foundUsers)}
     </>
   );
 }

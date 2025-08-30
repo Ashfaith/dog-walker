@@ -3,11 +3,6 @@ import { defineConfig } from "drizzle-kit";
 
 const caCert = process.env.DATABASE_CA_CERT?.replace(/\\n/g, "\n");
 
-console.log(
-  "CA cert loaded?",
-  caCert?.startsWith("-----BEGIN CERTIFICATE-----")
-);
-
 export default defineConfig({
   out: "./drizzle",
   schema: "./src/db/schema.ts",
