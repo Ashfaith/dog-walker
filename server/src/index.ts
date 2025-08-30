@@ -3,8 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
+const pgSession = require("connect-pg-simple")(session);
 const pool = require("./db/pool");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
@@ -16,7 +16,6 @@ require("./config/passport");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-app.set("trust proxy", 1);
 
 app.use(
   cors({
@@ -31,18 +30,37 @@ app.use(
   session({
     store: new pgSession({
       pool: pool,
-      tableName: "session",
+      tableName: "user_sessions",
+      createTableIfMissing: true,
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production",
-      maxAge: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+      maxAge: 30 * 24 * 60 * 60 * 1000,
       sameSite: "lax",
     },
   })
 );
+
+// app.use(
+//   session({
+//     store: new pgSession({
+//       pool: pool,
+//       tableName: "user_sessions",
+//       createTableIfMissing: true,
+//     }),
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       secure: process.env.NODE_ENV === "production",
+//       maxAge: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+//       sameSite: "lax",
+//     },
+//   })
+// );
 
 app.use(passport.initialize());
 app.use(passport.session());

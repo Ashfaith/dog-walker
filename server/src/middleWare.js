@@ -6,7 +6,6 @@ export function ensureAuthenticated(req, res, next) {
     return next();
   } else {
     res.status(401).json({ error: "Authentication required" });
-    res.redirect("/login");
   }
 }
 
