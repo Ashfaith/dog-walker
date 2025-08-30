@@ -1,15 +1,16 @@
 const { isAdmin } = require("./helpers");
 const { check } = require("express-validator");
 
-function ensureAuthenticated(req, res, next) {
+export function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
     res.status(401).json({ error: "Authentication required" });
+    res.redirect("/login");
   }
 }
 
-function adminAuth(req, res, next) {
+export function adminAuth(req, res, next) {
   if (!isAdmin(req.user)) {
     return res.status(401).json({ message: "Not Authorised" });
   } else {
@@ -17,7 +18,7 @@ function adminAuth(req, res, next) {
   }
 }
 
-const validateCreate = [
+export const validateCreate = [
   check("firstName")
     .notEmpty()
     .withMessage("First name is required")
@@ -33,5 +34,3 @@ const validateCreate = [
     .withMessage("Invalid email")
     .normalizeEmail({ all_lowercase: true }),
 ];
-
-module.exports = { ensureAuthenticated, adminAuth, validateCreate };
