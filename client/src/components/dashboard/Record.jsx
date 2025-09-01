@@ -50,16 +50,26 @@ function Record() {
   };
 
   useEffect(() => {
+    const success = (position) => {
+      setCurrentPos(
+        L.latLng(position.coords.latitude, position.coords.longitude)
+      );
+    };
+
+    const error = (err) => {
+      console.error("Geolocation error:", err);
+      L.latLng(null, null);
+    };
+
+    const options = {
+      enableHighAccuracy: true,
+    };
+
     if ("geolocation" in navigator) {
       const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          setCurrentPos(
-            L.latLng(position.coords.latitude, position.coords.longitude)
-          );
-        },
-        (err) => {
-          console.error("Geolocation error:", err);
-        }
+        success,
+        error,
+        options
       );
 
       return () => {

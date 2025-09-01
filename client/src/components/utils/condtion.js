@@ -3,7 +3,7 @@ export const condition = {
     type: "sun",
     advice: "Great walking weather! Just bring water if it’s a warm day.",
   },
-  "Partly cloudy": {
+  "Partly Cloudy": {
     type: "cloud",
     advice: "Nice and mild—perfect for a walk with some shade breaks.",
   },
