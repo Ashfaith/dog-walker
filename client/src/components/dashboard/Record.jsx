@@ -93,7 +93,7 @@ function Record() {
     if (historicalPos[0]) {
       const distanceDelta = historicalPos[0].distanceTo(currentPos);
       const convertedDelta = convertToKm(distanceDelta);
-      setDistanceTotal((prev) => prev + convertedDelta);
+      setDistanceTotal((prev) => prev + Number(convertedDelta.toFixed(2)));
     }
 
     setHistoricalPos((prev) => [currentPos, ...prev]);
