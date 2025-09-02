@@ -7,6 +7,10 @@ export const condition = {
     type: "cloud",
     advice: "Nice and mild—perfect for a walk with some shade breaks.",
   },
+  "Partly cloudy": {
+    type: "cloud",
+    advice: "Nice and mild—perfect for a walk with some shade breaks.",
+  },
   Cloudy: {
     type: "cloud",
     advice: "Comfortable walking weather. Great for dogs who overheat easily.",

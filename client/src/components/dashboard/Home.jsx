@@ -36,6 +36,7 @@ function Home() {
 
   return (
     <>
+      {console.log(weather)}
       <div>
         {weather && weather.current ? (
           <section className="forecast">
