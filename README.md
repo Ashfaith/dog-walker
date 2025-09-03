@@ -35,7 +35,7 @@ The app is currently live as a web app only at the moment.
 
 Visit https://sweet-nasturtium-3fadc5.netlify.app/dashboard to get started.
 
-While still in early devlopment, if you would like to sign up to try out the app, please email me an account: ash@faithfull.dev
+While still in early devlopment, if you would like to sign up to try out the app, please email me an to request an account: ash@faithfull.dev
 
 The feed will display a short description of current conditions, all of your activity, and activity of anyone you follow.
 
