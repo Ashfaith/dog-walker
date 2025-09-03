@@ -1,7 +1,7 @@
 <br />
 <div align="center">
 
-  <h3 align="center">Walker</h3>
+  <h1 align="center">Walker</h1>
 
   <p align="center">
     An app for tracking walks with your four legged friend
