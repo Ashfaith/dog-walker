@@ -20,10 +20,7 @@ The app let's you follow friends and see their activity too so you can keep up t
 
 ### Built With
 
-- [![React][React.js]][React-url]
-- [![Vite][vite.dev]][vite-url]
-- [![Node.js][nodejs.org]][nodejs-url]
-- [![Express.js][expressjs.com]][expressjs-url]
+-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/) -[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/) -[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/) -[![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
