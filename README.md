@@ -33,7 +33,7 @@ The app let's you follow friends and see their activity too so you can keep up t
 
 The app is currently live as a web app only at the moment.
 
-Visit https://sweet-nasturtium-3fadc5.netlify.app/dashboard to get started.
+Visit https://sweet-nasturtium-3fadc5.netlify.app/ to get started.
 
 While still in early devlopment, if you would like to sign up to try out the app, please email me an to request an account: ash@faithfull.dev
 
