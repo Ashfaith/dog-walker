@@ -43,7 +43,7 @@ The feed will display a short description of current conditions, all of your act
 
 Activity can be recorded and will update live based on your location.
 
-![Alt text](./images/record.png)
+![Alt text](./images/record1.png)
 
 Search and find friends to follow
 
