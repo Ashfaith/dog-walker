@@ -85,6 +85,8 @@
 
 .follower-list {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .followers-section > h3 {
@@ -99,24 +101,33 @@
 .follower-container {
   display: flex;
   width: 100%;
-  height: 1.2em;
+  height: 3.5rem;
   border-radius: 5px;
   flex-direction: row;
-  padding: 1.2rem;
   align-items: center;
-  justify-content: space-between;
-  gap: 25px;
+  justify-content: space-around;
   background-color: var(--light-card);
 }
 
-.grid-container {
+.follow-btn-container {
+  width: 45%;
   display: flex;
-  width: 100%;
+  justify-content: end;
+}
+
+.name-container {
+  width: 45%;
+}
+
+.status-cont {
+  height: 30px;
+  width: 80px;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.follower-container > button {
+.follow-btn-container > button {
   height: 30px;
   width: 80px;
   display: flex;
@@ -125,4 +136,6 @@
   font-size: 14px;
   border: 1px solid rgb(143, 143, 143);
   background-color: transparent;
+  color: black;
+  font-size: 1rem;
 }

@@ -131,19 +131,26 @@ function Followers() {
               ? null
               : followers.map((follower, index) => (
                   <li className="follower-container" key={index}>
-                    <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
-                    {follower.following === false ? (
-                      <p>pending</p>
-                    ) : !follower.following ? (
-                      <FollowButton
-                        follower={follower}
-                        textTrue={"Requested"}
-                        textFalse={"Follow"}
-                        onClick={() => sendFollowRequest(follower.followerId)}
-                      />
-                    ) : (
-                      <p>Following</p>
-                    )}
+                    <div className="name-container">
+                      <h4>{`${follower.firstName} ${follower.lastName}`}</h4>
+                    </div>
+
+                    <div className="follow-btn-container">
+                      {follower.following === false ? (
+                        <p>pending</p>
+                      ) : !follower.following ? (
+                        <FollowButton
+                          follower={follower}
+                          textTrue={"Requested"}
+                          textFalse={"Follow"}
+                          onClick={() => sendFollowRequest(follower.followerId)}
+                        />
+                      ) : (
+                        <div className="status-cont">
+                          <p>Following</p>
+                        </div>
+                      )}
+                    </div>
                   </li>
                 ))}
           </ul>

@@ -1,12 +1,78 @@
-# React + Vite
+<br />
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  <h3 align="center">Walker</h3>
 
-Currently, two official plugins are available:
+  <p align="center">
+    An app for tracking walks with your four legged friend
+    </p>
+    <a href="https://github.com/othneildrew/Best-README-Template">View Site</a>
+    &middot;
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- ABOUT THE PROJECT -->
 
-## Expanding the ESLint configuration
+## About The Project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Walker was created as a clone of popular activity trackers (think Strava, Nike Run Club) with a focus around dog walks.
+
+The app let's you follow friends and see their activity too so you can keep up to date with all your favourite pups.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+- [![React][React.js]][React-url]
+- [![Vite][vite.dev]][vite-url]
+- [![Node.js][nodejs.org]][nodejs-url]
+- [![Express.js][expressjs.com]][expressjs-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## Using walker
+
+The app is currently live as a web app only at the moment.
+
+Visit https://sweet-nasturtium-3fadc5.netlify.app/dashboard to get started.
+
+While still in early devlopment, if you would like to sign up to try out the app, please email me an account: ash@faithfull.dev
+
+The feed will display a short description of current conditions, all of your activity, and activity of anyone you follow.
+
+![Alt text](./images/feed.png)
+
+Activity can be recorded and will update live based on your location.
+
+![Alt text](./images/record.png)
+
+Search and find friends to follow
+
+![Alt text](./images/followers.png)
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+- [x] Deploy for mobile testing
+- [ ] Fix known bugs
+- [ ] Add photos and map screenshots
+- [ ] Add ability to list your dog
+- [ ] Add ability to be a walker of another users dog
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Ash Faithfull - ash@faithfull.dev
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
