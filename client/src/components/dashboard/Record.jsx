@@ -80,13 +80,8 @@ function Record() {
     }
   }, []);
 
-  //Compare the positions. If a new postion then log that.
-  const compareArrays = (a, b) => {
-    return JSON.stringify(a) === JSON.stringify(b);
-  };
-
   useEffect(() => {
-    if (compareArrays(historicalPos[0], currentPos) || !currentPos) {
+    if (!currentPos) {
       return;
     }
 
@@ -94,9 +89,8 @@ function Record() {
       const distanceDelta = historicalPos[0].distanceTo(currentPos);
       const convertedDelta = convertToKm(distanceDelta);
       setDistanceTotal((prev) => prev + Number(convertedDelta.toFixed(2)));
+      setHistoricalPos((prev) => [currentPos, ...prev]);
     }
-
-    setHistoricalPos((prev) => [currentPos, ...prev]);
   }, [currentPos]);
 
   const topIcon = L.divIcon({
