@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L from "leaflet";
 import "../../assets/leaflet.css";
@@ -21,9 +21,6 @@ L.Icon.Default.mergeOptions({
 export const DrawerContext = createContext(null);
 
 function Record() {
-  const [currentPos, setCurrentPos] = useState(null);
-  const [historicalPos, setHistoricalPos] = useState([]);
-  const [distanceTotal, setDistanceTotal] = useState(0);
   const [activityTime, setActivityTime] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState({
@@ -48,6 +45,8 @@ function Record() {
       alert("post created");
     }
   };
+
+  const [currentPos, setCurrentPos] = useState(null);
 
   useEffect(() => {
     const success = (position) => {
@@ -80,17 +79,26 @@ function Record() {
     }
   }, []);
 
+  const lastPos = useRef(null);
+  const [distanceTotal, setDistanceTotal] = useState(0);
+  const [historicalPos, setHistoricalPos] = useState([]);
+
   useEffect(() => {
-    if (!currentPos) {
-      return;
+    if (!currentPos) return;
+
+    console.log(currentPos);
+
+    if (lastPos.current === null) {
+      lastPos.current = currentPos;
     }
 
-    if (historicalPos[0]) {
-      const distanceDelta = historicalPos[0].distanceTo(currentPos);
-      const convertedDelta = convertToKm(distanceDelta);
-      setDistanceTotal((prev) => prev + Number(convertedDelta.toFixed(2)));
-      setHistoricalPos((prev) => [currentPos, ...prev]);
-    }
+    console.log(lastPos);
+
+    const distanceDelta = lastPos.current.distanceTo(currentPos);
+    const convertedDelta = convertToKm(distanceDelta);
+    setDistanceTotal((prev) => prev + Number(convertedDelta.toFixed(2)));
+    setHistoricalPos((prev) => [currentPos, ...prev]);
+    lastPos.current = currentPos;
   }, [currentPos]);
 
   const topIcon = L.divIcon({
