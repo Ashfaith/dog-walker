@@ -90,6 +90,7 @@ function Record() {
 
     if (lastPos.current === null) {
       lastPos.current = currentPos;
+      return;
     }
 
     console.log(lastPos);
