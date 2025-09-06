@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaPlay, FaStop, FaPause } from "react-icons/fa";
 
 const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
-  const [started, setStart] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  const start = useRef(null);
 
   // state to store time
   const [time, setTime] = useState(0);
@@ -11,29 +13,33 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let intervalId;
-    if (isRunning) {
-      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
-      intervalId = setInterval(() => setTime(time + 1), 10);
-    }
-    return () => clearInterval(intervalId);
-  }, [isRunning, time]);
+    if (!isRunning) return;
+
+    console.log("start:", start.current);
+    let delta = setInterval(() => {
+      setTime(Date.now() - start.current);
+    }, 1000);
+    console.log(time);
+
+    return () => clearInterval(delta);
+  }, [isRunning]);
 
   // Hours calculation
-  const hours = Math.floor(time / 360000);
+  const hours = Math.floor(time / 3600000);
 
   // Minutes calculation
-  const minutes = Math.floor((time % 360000) / 6000);
+  const minutes = Math.floor(time / 60000);
 
   // Seconds calculation
-  const seconds = Math.floor((time % 6000) / 100);
+  const seconds = Math.floor(time / 1000);
 
   // Method to start and stop timer
   const startAndPause = () => {
     if (!started) {
-      setStart(true);
+      setStarted(true);
+      start.current = Date.now();
     }
-    setIsRunning(!isRunning);
+    isRunning === fasle ? setIsRunning(true) : setIsRunning(false);
   };
 
   const handleStop = () => {
