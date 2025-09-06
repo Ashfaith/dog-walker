@@ -15,23 +15,18 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
   useEffect(() => {
     if (!isRunning) return;
 
-    console.log("start:", start.current);
+    console.log("running");
     let delta = setInterval(() => {
       setTime(Date.now() - start.current);
     }, 1000);
-    console.log(time);
 
     return () => clearInterval(delta);
   }, [isRunning]);
 
   // Hours calculation
   const hours = Math.floor(time / 3600000);
-
-  // Minutes calculation
-  const minutes = Math.floor(time / 60000);
-
-  // Seconds calculation
-  const seconds = Math.floor(time / 1000);
+  const minutes = Math.floor((time % 3600000) / 60000);
+  const seconds = Math.floor((time % 60000) / 1000);
 
   // Method to start and stop timer
   const startAndPause = () => {
@@ -39,7 +34,7 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
       setStarted(true);
       start.current = Date.now();
     }
-    isRunning === fasle ? setIsRunning(true) : setIsRunning(false);
+    isRunning === false ? setIsRunning(true) : setIsRunning(false);
   };
 
   const handleStop = () => {
