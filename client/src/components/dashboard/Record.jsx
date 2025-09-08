@@ -86,14 +86,10 @@ function Record() {
   useEffect(() => {
     if (!currentPos) return;
 
-    console.log(currentPos);
-
     if (lastPos.current === null) {
       lastPos.current = currentPos;
       return;
     }
-
-    console.log(lastPos);
 
     const distanceDelta = lastPos.current.distanceTo(currentPos);
     const convertedDelta = convertToKm(distanceDelta);

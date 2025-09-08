@@ -65,11 +65,11 @@ function Login() {
             </button>
           </form>
 
-          <h2 className="divider">or</h2>
+          {/* <h2 className="divider">or</h2>
 
           <div className="sign-up">
             <NavLink to="/signup"> Sign Up</NavLink>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

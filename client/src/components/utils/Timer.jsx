@@ -3,38 +3,46 @@ import { FaPlay, FaStop, FaPause } from "react-icons/fa";
 
 const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
   const [started, setStarted] = useState(false);
-
-  const start = useRef(null);
-
   // state to store time
   const [time, setTime] = useState(0);
-
   // state to check stopwatch running or not
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning, setIsRunning] = useState(null);
+
+  const start = useRef(null);
+  const pauseStart = useRef(null);
+  const totalPause = useRef(0);
 
   useEffect(() => {
-    if (!isRunning) return;
+    let delta;
 
-    console.log("running");
-    let delta = setInterval(() => {
-      setTime(Date.now() - start.current);
-    }, 1000);
+    if (isRunning && started) {
+      delta = setInterval(() => {
+        const now = Date.now();
+        const elapsed = now - start.current - totalPause.current;
+        setTime(elapsed);
+      }, 1000);
+    }
 
     return () => clearInterval(delta);
-  }, [isRunning]);
+  }, [isRunning, started]);
 
-  // Hours calculation
   const hours = Math.floor(time / 3600000);
   const minutes = Math.floor((time % 3600000) / 60000);
   const seconds = Math.floor((time % 60000) / 1000);
 
-  // Method to start and stop timer
   const startAndPause = () => {
     if (!started) {
       setStarted(true);
       start.current = Date.now();
+      setIsRunning(true);
+    } else if (isRunning) {
+      pauseStart.current = Date.now();
+      setIsRunning(false);
+    } else {
+      const pauseDuration = Date.now() - pauseStart.current;
+      totalPause.current += pauseDuration;
+      setIsRunning(true);
     }
-    isRunning === false ? setIsRunning(true) : setIsRunning(false);
   };
 
   const handleStop = () => {
