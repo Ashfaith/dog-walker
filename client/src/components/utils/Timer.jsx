@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaPlay, FaStop, FaPause } from "react-icons/fa";
 
-const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
+const Stopwatch = ({ setActivityTime, setOpen, distance, recording }) => {
   const [started, setStarted] = useState(false);
   // state to store time
   const [time, setTime] = useState(0);
@@ -10,7 +10,7 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
 
   const start = useRef(null);
   const pauseStart = useRef(null);
-  const totalPause = useRef(0);
+  const totalPauseTime = useRef(0);
 
   useEffect(() => {
     let delta;
@@ -18,7 +18,7 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
     if (isRunning && started) {
       delta = setInterval(() => {
         const now = Date.now();
-        const elapsed = now - start.current - totalPause.current;
+        const elapsed = now - start.current - totalPauseTime.current;
         setTime(elapsed);
       }, 1000);
     }
@@ -31,6 +31,7 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
   const seconds = Math.floor((time % 60000) / 1000);
 
   const startAndPause = () => {
+    recording((prev) => !prev);
     if (!started) {
       setStarted(true);
       start.current = Date.now();
@@ -40,7 +41,7 @@ const Stopwatch = ({ setActivityTime, setOpen, distance }) => {
       setIsRunning(false);
     } else {
       const pauseDuration = Date.now() - pauseStart.current;
-      totalPause.current += pauseDuration;
+      totalPauseTime.current += pauseDuration;
       setIsRunning(true);
     }
   };

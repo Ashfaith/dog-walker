@@ -1,5 +1,11 @@
 import { useState, useEffect, createContext, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  useMap,
+} from "react-leaflet";
 import L from "leaflet";
 import "../../assets/leaflet.css";
 import "./record.css";
@@ -20,9 +26,20 @@ L.Icon.Default.mergeOptions({
 
 export const DrawerContext = createContext(null);
 
+function ChangeLocation(location) {
+  console.log("lat", location.location.lat);
+  const map = useMap();
+  useEffect(() => {
+    map.setView([location.location.lat, location.location.lng]);
+  }, [location]);
+
+  return null;
+}
+
 function Record() {
   const [activityTime, setActivityTime] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const [post, setPost] = useState({
     title: "",
     content: "",
@@ -84,7 +101,8 @@ function Record() {
   const [historicalPos, setHistoricalPos] = useState([]);
 
   useEffect(() => {
-    if (!currentPos) return;
+    console.log(isRecording);
+    if (!currentPos || !isRecording) return;
 
     if (lastPos.current === null) {
       lastPos.current = currentPos;
@@ -93,7 +111,9 @@ function Record() {
 
     const distanceDelta = lastPos.current.distanceTo(currentPos);
     const convertedDelta = convertToKm(distanceDelta);
+
     if (convertedDelta < 0.01) return;
+
     setDistanceTotal((prev) => prev + Number(convertedDelta.toFixed(2)));
     setHistoricalPos((prev) => [currentPos, ...prev]);
     lastPos.current = currentPos;
@@ -122,6 +142,7 @@ function Record() {
 
   return (
     <>
+      {console.log(currentPos)}
       {!currentPos ? (
         <p>fetching location</p>
       ) : (
@@ -130,6 +151,7 @@ function Record() {
             url={`${import.meta.env.VITE_API_URL}/dashboard/map/{z}/{x}/{y}`}
             attribution='<a href="https://www.jawg.io?utm_medium=map&utm_source=attribution" target="_blank">&copy; Jawg</a> - <a href="https://www.openstreetmap.org?utm_medium=map-attribution&utm_source=jawg" target="_blank">&copy; OpenStreetMap</a>&nbsp;contributors'
           />
+          <ChangeLocation location={currentPos} />
           <Marker className="top-icon" position={currentPos} icon={topIcon} />
           <Marker
             className="bottom-icon"
@@ -144,6 +166,7 @@ function Record() {
           setActivityTime={setActivityTime}
           setOpen={setIsOpen}
           distance={distanceTotal}
+          recording={setIsRecording}
         />
         <ActivityDrawer>
           <>
