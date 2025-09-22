@@ -3,7 +3,7 @@ import { heatRisk } from "./heatRisk";
 
 export const convertToKm = (meters) => {
   const km = meters / 1000;
-  return Number(km.toFixed(2));
+  return Number(km);
 };
 
 export const walkingAdvice = (weatherData) => {

@@ -27,7 +27,6 @@ L.Icon.Default.mergeOptions({
 export const DrawerContext = createContext(null);
 
 function ChangeLocation(location) {
-  console.log("lat", location.location.lat);
   const map = useMap();
   useEffect(() => {
     map.setView([location.location.lat, location.location.lng]);
@@ -96,27 +95,26 @@ function Record() {
     }
   }, []);
 
-  const lastPos = useRef(null);
+  const [lastPos, setLastPos] = useState(null);
   const [distanceTotal, setDistanceTotal] = useState(0);
   const [historicalPos, setHistoricalPos] = useState([]);
 
   useEffect(() => {
-    console.log(isRecording);
     if (!currentPos || !isRecording) return;
 
-    if (lastPos.current === null) {
-      lastPos.current = currentPos;
+    if (lastPos === null) {
+      setLastPos(currentPos);
       return;
     }
 
-    const distanceDelta = lastPos.current.distanceTo(currentPos);
+    const distanceDelta = lastPos.distanceTo(currentPos);
     const convertedDelta = convertToKm(distanceDelta);
 
     if (convertedDelta < 0.01) return;
 
-    setDistanceTotal((prev) => prev + Number(convertedDelta.toFixed(2)));
-    setHistoricalPos((prev) => [currentPos, ...prev]);
-    lastPos.current = currentPos;
+    setDistanceTotal((prev) => prev + Number(convertedDelta));
+    setHistoricalPos((prev) => [...prev, currentPos]);
+    setLastPos(currentPos);
   }, [currentPos]);
 
   const topIcon = L.divIcon({
@@ -142,7 +140,6 @@ function Record() {
 
   return (
     <>
-      {console.log(currentPos)}
       {!currentPos ? (
         <p>fetching location</p>
       ) : (
@@ -192,7 +189,7 @@ function Record() {
               <div className="stats-container">
                 <div className="distance-cont">
                   <p>Distance</p>
-                  <h4>{distanceTotal}km</h4>
+                  <h4>{distanceTotal.toFixed(2)}km</h4>
                 </div>
                 <div className="time-cont">
                   <p>Time: </p>
