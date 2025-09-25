@@ -21,6 +21,7 @@ export const posts = pgTable("posts", {
   id: uuid("id").primaryKey().defaultRandom(),
   title: varchar("title", { length: 255 }).notNull(),
   content: varchar("content"),
+  image: uuid("image_url"),
   user_id: uuid("user_id")
     .notNull()
     .references(() => usersTable.id),

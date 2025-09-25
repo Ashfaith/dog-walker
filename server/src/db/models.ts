@@ -197,6 +197,7 @@ async function queryPosts(currentUser: string) {
       title: posts.title,
       created: posts.createdAt,
       content: posts.content,
+      image: posts.image,
       distance: posts.distance,
       time: posts.time,
       userId: posts.user_id,

@@ -44,10 +44,38 @@ function Record() {
     content: "",
     distance: "",
     time: "",
+    imageId: "",
   });
+  const [image, setImage] = useState(null);
+
+  const validImageTypes = ["image/jpg", "image,jpeg", "image/png"];
+  const [error, setError] = useState("");
+
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (!validImageTypes.find((type) => type === file.type)) {
+      setError("Invalid file type. Must be JPG/PNG");
+      return;
+    }
+
+    const form = new FormData();
+    form.append("image", file);
+
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/dashboard/image`, {
+      method: "POST",
+      headers: { "Content-Type": "image/jpeg" },
+      credentials: "include",
+      body: JSON.stringify(form),
+    });
+    if (res.ok) {
+      alert("post created");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const res = await fetch(
       `${import.meta.env.VITE_API_URL}/dashboard/createPost`,
       {
@@ -185,6 +213,16 @@ function Record() {
                   required
                 />
               </div>
+
+              <label htmlFor="imageInput">Add Photo</label>
+              <input
+                type="file"
+                name="myImage"
+                id="imageInput"
+                hidden
+                onChange={handleUpload}
+              ></input>
+              {error && <p>{error}</p>}
 
               <div className="stats-container">
                 <div className="distance-cont">
